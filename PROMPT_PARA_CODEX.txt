@@ -1,0 +1,7 @@
+Abre primero CODEX_HANDOFF.md y úsalo como especificación del proyecto.
+
+Revisa todo el repositorio antes de editar. Quiero que conviertas esta base en una versión lista para producción de ROCKSPACEHN. La RCL1005 de stickers debe ser el centro del sitio. Todos los tutoriales, imágenes, características, fichas y soporte deben sentirse integrados dentro de nuestra página, sin enviar al usuario a páginas externas del fabricante.
+
+Haz una auditoría visual y técnica completa, corrige lo que haga falta, mejora el impacto del Home y de las fichas de producto, asegúrate de que RCL1005, MINI ZV2, ZC1 Max y ZC5 tengan tutorial integrado y contenido visual suficiente, y valida build, TypeScript y responsive antes de terminar.
+
+No inventes especificaciones. No sustituyas contenido real por placeholders. Al final dame un resumen de cambios y cualquier asset pendiente.

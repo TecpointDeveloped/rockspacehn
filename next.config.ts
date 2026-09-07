@@ -4,6 +4,7 @@ const nextConfig: NextConfig = {
   reactStrictMode: true,
   images: {
     formats: ["image/avif", "image/webp"],
+    qualities: [75, 88],
     minimumCacheTTL: 86400,
     remotePatterns: [{ protocol: "https", hostname: "**.public.blob.vercel-storage.com" }],
   },

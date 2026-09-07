@@ -1,6 +1,11 @@
+"use client";
+
+import { usePathname } from "next/navigation";
 import { whatsappUrl } from "@/lib/site";
 
 export function WhatsAppFloat() {
+  const pathname = usePathname();
+  if (pathname.startsWith("/admin")) return null;
   return (
     <a
       className="whatsapp-float"

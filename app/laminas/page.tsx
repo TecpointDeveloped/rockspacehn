@@ -4,13 +4,17 @@ import { SectionHeading } from "@/components/SectionHeading";
 import { SupportCTA } from "@/components/SupportCTA";
 import { films } from "@/data/films";
 import { whatsappUrl } from "@/lib/site";
+import { getCmsContent } from "@/lib/cms";
 
 export const metadata: Metadata = {
   title: "Láminas",
   description: "Tipos de láminas de protección compatibles con soluciones Rock Space."
 };
 
-export default function FilmsPage() {
+export const revalidate = 60;
+
+export default async function FilmsPage() {
+  const cms = await getCmsContent();
   return (
     <>
       <section className="page-hero shell narrow-hero">
@@ -20,10 +24,10 @@ export default function FilmsPage() {
       </section>
 
       <section className="section shell film-catalog">
-        {films.map((film, index) => (
+        {cms.films.map((film, index) => (
           <article className={`film-catalog-card ${index % 2 ? "reverse" : ""}`} key={film.name}>
             <div className={`film-product-image film-${film.tone}`}>
-              <Image src={film.image} alt={film.alt} width={1100} height={860} sizes="(max-width: 920px) 100vw, 50vw" />
+              <Image src={film.image} alt={film.alt} width={1100} height={860} quality={88} sizes="(max-width: 920px) 92vw, 560px" />
             </div>
             <div className="film-catalog-copy">
               <span className="eyebrow">TIPO DE PELÍCULA</span>

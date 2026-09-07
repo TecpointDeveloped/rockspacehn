@@ -4,14 +4,19 @@ import { VideoEmbed } from "@/components/VideoEmbed";
 import { machines } from "@/data/machines";
 import { stickerMachine } from "@/data/stickerMachine";
 import { SITE, whatsappUrl } from "@/lib/site";
+import { getCmsContent } from "@/lib/cms";
 
 export const metadata: Metadata = {
   title: "Tutoriales",
   description: "Centro de tutoriales Rock Space Honduras para RCL1005, MINI ZV2, ZC1 Max y ZC5."
 };
 
-export default function TutorialsPage() {
-  const s = stickerMachine;
+export const revalidate = 60;
+
+export default async function TutorialsPage() {
+  const cms = await getCmsContent();
+  const s = cms.sticker || stickerMachine;
+  const visibleMachines = cms.machines.filter((machine) => machine.active !== false);
 
   return (
     <>
@@ -31,7 +36,7 @@ export default function TutorialsPage() {
             <div><span className="eyebrow">RCL1005 · STICKERS</span><h2>De una foto al sticker terminado</h2></div>
             <Link className="text-link" href="/stickers#tutorial">Abrir guía completa →</Link>
           </div>
-          <VideoEmbed youtubeId={s.youtubeId} title={s.videoLabel} />
+          <VideoEmbed youtubeId={s.youtubeId} title={s.videoLabel} spanishSummary={s.spanishSummary} />
           <div className="tutorial-topic-grid tutorial-topic-grid-five">
             {s.steps.map((step) => <div key={step.title}><strong>{step.title}</strong><span>{step.text}</span></div>)}
           </div>
@@ -39,13 +44,13 @@ export default function TutorialsPage() {
 
         <div className="tutorial-divider"><span>PROTECCIÓN DE PANTALLA</span></div>
 
-        {machines.map((machine) => (
+        {visibleMachines.map((machine) => (
           <article className="tutorial-library-item" key={machine.slug}>
             <div className="tutorial-library-head">
               <div><span className="eyebrow">{machine.name}</span><h2>Primer uso y funcionamiento</h2></div>
               <Link className="text-link" href={`/maquinas/${machine.slug}#tutorial`}>Abrir guía completa →</Link>
             </div>
-            <VideoEmbed youtubeId={machine.youtubeId} title={machine.videoLabel} />
+            <VideoEmbed youtubeId={machine.youtubeId} title={machine.videoLabel} spanishSummary={machine.spanishSummary} />
             <div className="tutorial-topic-grid">
               {machine.steps.map((step) => <div key={step.title}><strong>{step.title}</strong><span>{step.text}</span></div>)}
             </div>

@@ -26,6 +26,8 @@ export function SiteHeader() {
     return () => window.removeEventListener("keydown", onKeyDown);
   }, []);
 
+  if (pathname.startsWith("/admin")) return null;
+
   return (
     <header className="site-header">
       <div className="nav-shell">

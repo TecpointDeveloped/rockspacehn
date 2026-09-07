@@ -4,14 +4,20 @@ import Image from "next/image";
 import { machines } from "@/data/machines";
 import { stickerMachine } from "@/data/stickerMachine";
 import { SITE, whatsappUrl } from "@/lib/site";
+import { getCmsContent } from "@/lib/cms";
 
 export const metadata: Metadata = {
   title: "Soporte",
   description: "Soporte técnico y guías para RCL1005, MINI ZV2, ZC1 Max y ZC5 en Honduras."
 };
 
-export default function SupportPage() {
-  const s = stickerMachine;
+export const revalidate = 60;
+
+export default async function SupportPage() {
+  const cms = await getCmsContent();
+  const s = cms.sticker || stickerMachine;
+  const support = cms.support;
+  const supportUrl = (message: string) => `https://wa.me/${support.whatsappNumber}?text=${encodeURIComponent(message)}`;
 
   return (
     <>
@@ -20,7 +26,7 @@ export default function SupportPage() {
           <span className="eyebrow light">SOPORTE ROCKSPACEHN</span>
           <h1>¿Qué necesita resolver?</h1>
           <p>Empiece por la guía de su equipo. Si el problema continúa, escriba directamente a soporte técnico.</p>
-          <a className="button button-white" href={whatsappUrl("Hola Benjamín, necesito soporte técnico de Rock Space.")} target="_blank" rel="noreferrer">Hablar con {SITE.advisor}</a>
+          <a className="button button-white" href={supportUrl(`Hola ${support.advisor}, necesito soporte técnico de Rock Space.`)} target="_blank" rel="noreferrer">Hablar con {support.advisor}</a>
         </div>
       </section>
 
@@ -30,7 +36,7 @@ export default function SupportPage() {
             <Image src={s.heroImage} alt="RCL1005" width={760} height={620} sizes="(max-width: 640px) 100vw, (max-width: 920px) 50vw, 25vw" />
             <div><span>Stickers · guía y tutorial</span><h2>RCL1005</h2><b>Abrir →</b></div>
           </Link>
-          {machines.map((machine) => (
+          {cms.machines.filter((machine) => machine.active !== false).map((machine) => (
             <Link className="support-machine-card" href={`/maquinas/${machine.slug}#tutorial`} key={machine.slug}>
               <Image src={machine.image} alt={machine.name} width={760} height={620} sizes="(max-width: 640px) 100vw, (max-width: 920px) 50vw, 25vw" />
               <div><span>Protección · guía y tutorial</span><h2>{machine.name}</h2><b>Abrir →</b></div>
@@ -63,9 +69,9 @@ export default function SupportPage() {
       </section>
 
       <section className="contact-panel shell">
-        <div><span className="eyebrow">CONTACTO DIRECTO</span><h2>{SITE.advisor}</h2><p>Asesor técnico Rock Space Honduras · {SITE.instagramHandle}</p></div>
+        <div><span className="eyebrow">CONTACTO DIRECTO</span><h2>{support.advisor}</h2><p>Asesor técnico Rock Space Honduras · {support.instagramHandle}</p></div>
         <div className="button-row">
-          <a className="button button-primary" href={whatsappUrl("Hola Benjamín, necesito soporte técnico de Rock Space.")} target="_blank" rel="noreferrer">Abrir WhatsApp</a>
+          <a className="button button-primary" href={supportUrl(`Hola ${support.advisor}, necesito soporte técnico de Rock Space.`)} target="_blank" rel="noreferrer">Abrir WhatsApp</a>
         </div>
       </section>
     </>

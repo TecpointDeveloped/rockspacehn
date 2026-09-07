@@ -7,6 +7,7 @@ import { VideoEmbed } from "@/components/VideoEmbed";
 import { LearningPath } from "@/components/LearningPath";
 import { stickerMachine } from "@/data/stickerMachine";
 import { whatsappUrl } from "@/lib/site";
+import { getCmsContent } from "@/lib/cms";
 
 export const metadata: Metadata = {
   title: "Stickers personalizados | RCL1005",
@@ -20,8 +21,10 @@ export const metadata: Metadata = {
   twitter: { card: "summary_large_image", images: ["/images/products/rcl1005-stickers.webp"] }
 };
 
-export default function StickersPage() {
-  const s = stickerMachine;
+export const revalidate = 60;
+
+export default async function StickersPage() {
+  const s = (await getCmsContent()).sticker || stickerMachine;
   const learningItems = [
     { label: "Cómo funciona", title: "Vea el flujo completo", text: "Conozca cómo una foto se convierte en una hoja impresa y cortada desde el mismo equipo." },
     { label: "Configuración inicial", title: "Prepare equipo y SD21", text: "Ubique la RCL1005 en un mostrador estable, conecte la red y cargue los consumibles dedicados." },
@@ -83,7 +86,7 @@ export default function StickersPage() {
           <div className="sticker-gallery">
             {s.gallery.map((image, index) => (
               <figure className={index === 0 || index === 3 ? "sticker-gallery-wide" : ""} key={image.src}>
-                <Image src={image.src} alt={image.alt} width={1400} height={900} priority={index < 2} sizes={index === 0 || index === 3 ? "100vw" : "(max-width: 640px) 100vw, 50vw"} />
+                <Image src={image.src} alt={image.alt} width={1400} height={900} priority={index === 0} quality={88} sizes={index === 0 || index === 3 ? "(max-width: 1180px) 100vw, 1180px" : "(max-width: 640px) 100vw, 50vw"} />
                 <figcaption>{image.alt}</figcaption>
               </figure>
             ))}
@@ -112,7 +115,7 @@ export default function StickersPage() {
             <p>El video se reproduce dentro de esta página. Debajo está el flujo resumido para que el equipo de tienda pueda aprenderlo aquí mismo.</p>
             <div className="tutorial-chip">▶ RCL1005 · VIDEO INTEGRADO</div>
           </div>
-          <VideoEmbed youtubeId={s.youtubeId} title={s.videoLabel} />
+          <VideoEmbed youtubeId={s.youtubeId} title={s.videoLabel} spanishSummary={s.spanishSummary} />
         </div>
         <div className="shell sticker-step-grid">
           {s.steps.map((step) => <article key={step.title}><h3>{step.title}</h3><p>{step.text}</p></article>)}

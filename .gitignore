@@ -2,8 +2,13 @@ node_modules
 .next
 out
 .vercel
+.env*.local
+ROCKSPACEHN_ADMIN_ACCESS.txt
 .env
 .env.local
 .DS_Store
 *.log
 *.tsbuildinfo
+
+.vercel
+.env*

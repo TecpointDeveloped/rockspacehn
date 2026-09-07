@@ -3,7 +3,7 @@ export type Step = { title: string; text: string };
 export type Faq = { question: string; answer: string };
 
 export type Machine = {
-  slug: "mini-zv2" | "zc1-max" | "zc5";
+  slug: string;
   name: string;
   eyebrow: string;
   tagline: string;

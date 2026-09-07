@@ -5,13 +5,18 @@ import { SectionHeading } from "@/components/SectionHeading";
 import { SupportCTA } from "@/components/SupportCTA";
 import { machines } from "@/data/machines";
 import { whatsappUrl } from "@/lib/site";
+import { getCmsContent } from "@/lib/cms";
 
 export const metadata: Metadata = {
   title: "Máquinas",
   description: "Compare MINI ZV2, ZC1 Max y ZC5 de Rock Space Honduras."
 };
 
-export default function MachinesPage() {
+export const revalidate = 60;
+
+export default async function MachinesPage() {
+  const cms = await getCmsContent();
+  const visibleMachines = cms.machines.filter((machine) => machine.active !== false);
   return (
     <>
       <section className="page-hero shell narrow-hero">
@@ -21,7 +26,7 @@ export default function MachinesPage() {
       </section>
 
       <section className="section shell machine-grid">
-        {machines.map((machine, index) => <MachineCard key={machine.slug} machine={machine} index={index} />)}
+        {visibleMachines.map((machine, index) => <MachineCard key={machine.slug} machine={machine} index={index} />)}
       </section>
 
       <section className="section shell">
@@ -29,7 +34,7 @@ export default function MachinesPage() {
         <div className="compare-wrap">
           <table className="compare-table">
             <thead>
-              <tr><th>Característica</th>{machines.map((m) => <th key={m.slug}>{m.name}</th>)}</tr>
+              <tr><th>Característica</th>{visibleMachines.map((m) => <th key={m.slug}>{m.name}</th>)}</tr>
             </thead>
             <tbody>
               <tr><td>Enfoque</td><td>Compacta</td><td>Formatos grandes</td><td>Automatización</td></tr>
@@ -38,7 +43,7 @@ export default function MachinesPage() {
               <tr><td>Presión máx.</td><td>1200 g</td><td>1000 g</td><td>1500 g</td></tr>
               <tr><td>Formato destacado</td><td>Tablet hasta 11&quot;</td><td>Laptop hasta 16&quot;</td><td>Tablet hasta 12.2&quot;</td></tr>
               <tr><td>Automatización por QR</td><td>—</td><td>—</td><td>Sí</td></tr>
-              <tr><td></td>{machines.map((m) => <td key={m.slug}><Link className="table-link" href={`/maquinas/${m.slug}`}>Ver ficha →</Link></td>)}</tr>
+              <tr><td></td>{visibleMachines.map((m) => <td key={m.slug}><Link className="table-link" href={`/maquinas/${m.slug}`}>Ver ficha →</Link></td>)}</tr>
             </tbody>
           </table>
         </div>

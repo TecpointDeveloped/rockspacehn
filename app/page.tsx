@@ -6,18 +6,23 @@ import { VideoEmbed } from "@/components/VideoEmbed";
 import { stickerMachine } from "@/data/stickerMachine";
 import { machines } from "@/data/machines";
 import { whatsappUrl } from "@/lib/site";
+import { getCmsContent } from "@/lib/cms";
 
-export default function HomePage() {
-  const s = stickerMachine;
+export const revalidate = 60;
+
+export default async function HomePage() {
+  const cms = await getCmsContent();
+  const s = cms.sticker || stickerMachine;
+  const visibleMachines = cms.machines.filter((machine) => machine.active !== false);
 
   return (
     <>
       <section className="sticker-home-hero">
         <div className="shell sticker-home-grid">
           <div className="sticker-home-copy">
-            <span className="eyebrow light">ROCK SPACE HONDURAS · PERSONALIZACIÓN EN TIENDA</span>
-            <h1>Una foto.<br/><em>Un sticker.</em><br/>En minutos.</h1>
-            <p>La RCL1005 imprime y corta stickers personalizados desde un solo equipo. También crea skins, imprime fotos y corta protección frontal. Esta es la experiencia que ponemos en el centro de ROCKSPACEHN.</p>
+            <span className="eyebrow light">{cms.home.eyebrow}</span>
+            <h1>{cms.home.title}<br/><em>{cms.home.accent}</em></h1>
+            <p>{cms.home.description}</p>
             <div className="button-row">
               <Link className="button button-white" href="/stickers">Conocer RCL1005</Link>
               <a className="button button-ghost-light" href="#como-funciona">Ver cómo funciona</a>
@@ -32,7 +37,7 @@ export default function HomePage() {
 
           <div className="sticker-home-stage" aria-label="RCL1005 creando stickers personalizados">
             <div className="sticker-burst" />
-            <Image className="sticker-home-machine" src={s.heroImage} alt="RCL1005 impresora y cortadora de stickers Rock Space" width={1200} height={900} priority sizes="(max-width: 920px) 94vw, 56vw" />
+            <Image className="sticker-home-machine" src={cms.home.heroImage || s.heroImage} alt="RCL1005 impresora y cortadora de stickers Rock Space" width={1200} height={900} priority quality={88} sizes="(max-width: 920px) 94vw, 56vw" />
             <div className="floating-card sticker-float-one"><b>300 DPI</b><span>impresión HD</span></div>
             <div className="floating-card sticker-float-two"><b>0.1 mm</b><span>corte de contorno</span></div>
             <div className="floating-card sticker-float-three"><b>PRINT + CUT</b><span>todo en uno</span></div>
@@ -99,7 +104,7 @@ export default function HomePage() {
             <Link className="button button-white" href="/stickers#tutorial">Abrir guía completa</Link>
           </div>
           <div className="video-stage">
-            <VideoEmbed youtubeId={s.youtubeId} title={s.videoLabel} />
+            <VideoEmbed youtubeId={s.youtubeId} title={s.videoLabel} spanishSummary={s.spanishSummary} />
             <div className="video-under"><span>RCL1005</span><b>Foto → impresión → corte → sticker</b></div>
           </div>
         </div>
@@ -146,7 +151,7 @@ export default function HomePage() {
           </div>
           <p className="machines-after-intro">MINI ZV2, ZC1 Max y ZC5 complementan el ecosistema con corte profesional de láminas para teléfonos, tablets y otros dispositivos.</p>
           <div className="machine-grid machine-grid-dark">
-            {machines.map((machine, index) => <MachineCard key={machine.slug} machine={machine} index={index} />)}
+            {visibleMachines.map((machine, index) => <MachineCard key={machine.slug} machine={machine} index={index} />)}
           </div>
         </div>
       </section>

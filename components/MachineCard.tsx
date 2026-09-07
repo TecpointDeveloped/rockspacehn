@@ -12,7 +12,7 @@ export function MachineCard({ machine, index = 0 }: { machine: Machine; index?: 
         <Link className="text-link" href={`/maquinas/${machine.slug}`}>Conocer {machine.name} <span>→</span></Link>
       </div>
       <div className="machine-card-image">
-        <Image src={machine.image} alt={`${machine.name} de Rock Space`} width={1000} height={760} sizes="(max-width: 920px) 100vw, 62vw" />
+        <Image src={machine.image} alt={`${machine.name} de Rock Space`} width={1000} height={760} quality={88} sizes="(max-width: 640px) 92vw, (max-width: 920px) 86vw, 580px" />
       </div>
     </article>
   );

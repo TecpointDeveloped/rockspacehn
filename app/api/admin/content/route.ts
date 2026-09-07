@@ -13,7 +13,7 @@ export async function PUT(request: Request) {
   if (!(await getAdminSession())) return NextResponse.json({ error: "Acceso administrativo requerido." }, { status: 401 });
   if (!(await hasTrustedOrigin())) return NextResponse.json({ error: "Solicitud no válida." }, { status: 403 });
   const content = (await request.json()) as CmsContent;
-  if (!content?.home || !Array.isArray(content.machines) || !Array.isArray(content.films) || !content.support) {
+  if (!content?.home || !Array.isArray(content.machines) || !Array.isArray(content.films) || !content.support || !content.instagram) {
     return NextResponse.json({ error: "El contenido está incompleto." }, { status: 400 });
   }
   content.updatedAt = new Date().toISOString();

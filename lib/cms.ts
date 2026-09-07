@@ -8,12 +8,22 @@ import { SITE } from "@/lib/site";
 
 export type CmsMachine = Machine & { active?: boolean; spanishSummary?: string };
 export type CmsSticker = typeof stickerMachine & { spanishSummary?: string };
+export type CmsInstagramPost = { image: string; alt: string; caption: string; url: string };
+export type CmsInstagram = {
+  enabled: boolean;
+  handle: string;
+  profileUrl: string;
+  title: string;
+  description: string;
+  posts: CmsInstagramPost[];
+};
 export type CmsContent = {
   home: { eyebrow: string; title: string; accent: string; description: string; heroImage: string };
   sticker: CmsSticker;
   machines: CmsMachine[];
   films: Film[];
   support: { advisor: string; whatsappNumber: string; instagram: string; instagramHandle: string };
+  instagram: CmsInstagram;
   updatedAt?: string;
 };
 
@@ -36,6 +46,18 @@ export const defaultCmsContent: CmsContent = {
   })),
   films,
   support: { advisor: SITE.advisor, whatsappNumber: SITE.whatsappNumber, instagram: SITE.instagram, instagramHandle: SITE.instagramHandle },
+  instagram: {
+    enabled: true,
+    handle: SITE.instagramHandle,
+    profileUrl: SITE.instagram,
+    title: "Mirá lo que estamos creando.",
+    description: "Novedades, demostraciones y resultados reales de Rock Space Honduras.",
+    posts: [
+      { image: "/images/products/rcl1005-stickers.webp", alt: "Stickers personalizados creados con RCL1005", caption: "Stickers personalizados", url: SITE.instagram },
+      { image: "/images/products/rcl1005-skins.webp", alt: "Skins personalizadas Rock Space", caption: "Skins a la medida", url: SITE.instagram },
+      { image: "/images/products/zc5-hybrid.webp", alt: "Máquina inteligente de corte Rock Space", caption: "Equipos y demostraciones", url: SITE.instagram },
+    ],
+  },
 };
 
 async function loadRemoteContent(): Promise<CmsContent> {
@@ -52,6 +74,11 @@ async function loadRemoteContent(): Promise<CmsContent> {
       ...saved,
       home: { ...defaultCmsContent.home, ...saved.home },
       support: { ...defaultCmsContent.support, ...saved.support },
+      instagram: {
+        ...defaultCmsContent.instagram,
+        ...saved.instagram,
+        posts: Array.isArray(saved.instagram?.posts) ? saved.instagram.posts : defaultCmsContent.instagram.posts,
+      },
       sticker: { ...defaultCmsContent.sticker, ...saved.sticker },
       machines: Array.isArray(saved.machines) ? saved.machines : defaultCmsContent.machines,
       films: Array.isArray(saved.films) ? saved.films : defaultCmsContent.films,

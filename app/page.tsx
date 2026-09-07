@@ -170,6 +170,21 @@ export default async function HomePage() {
         </div>
       </section>
 
+      {cms.instagram.enabled && <section className="instagram-section">
+        <div className="shell section">
+          <div className="instagram-heading">
+            <div><span className="eyebrow light">INSTAGRAM · {cms.instagram.handle}</span><h2>{cms.instagram.title}</h2><p>{cms.instagram.description}</p></div>
+            <a className="button button-white" href={cms.instagram.profileUrl} target="_blank" rel="noreferrer">Seguir en Instagram ↗</a>
+          </div>
+          <div className="instagram-grid">
+            {cms.instagram.posts.slice(0, 3).map((post, index) => <a href={post.url || cms.instagram.profileUrl} target="_blank" rel="noreferrer" className="instagram-card" key={`${post.url}-${index}`}>
+              <Image src={post.image} alt={post.alt} width={720} height={720} sizes="(max-width: 640px) 92vw, (max-width: 920px) 46vw, 31vw" />
+              <span><b>{post.caption}</b><i>Ver en Instagram ↗</i></span>
+            </a>)}
+          </div>
+        </div>
+      </section>}
+
       <SupportCTA />
     </>
   );

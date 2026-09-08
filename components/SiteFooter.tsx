@@ -30,7 +30,7 @@ export function SiteFooter() {
           <h3>Contacto</h3>
           <a href={whatsappUrl("Hola, necesito asesoría sobre Rock Space.")} target="_blank" rel="noreferrer">WhatsApp</a>
           <span>{SITE.instagramHandle}</span>
-          <span>Asesor técnico: {SITE.advisor}</span>
+          <span>Soporte: equipo de expertos Rock Space</span>
         </div>
       </div>
       <div className="footer-bottom shell">

@@ -5,7 +5,6 @@ export const SITE = {
   instagram: "https://www.instagram.com/rockspacehn/",
   instagramHandle: "@rockspacehn",
   whatsappNumber: "50494659287",
-  advisor: "Benjamín Leiva",
 };
 
 export function whatsappUrl(message: string) {

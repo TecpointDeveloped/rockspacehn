@@ -3,7 +3,6 @@ import Link from "next/link";
 import Image from "next/image";
 import { machines } from "@/data/machines";
 import { stickerMachine } from "@/data/stickerMachine";
-import { SITE, whatsappUrl } from "@/lib/site";
 import { getCmsContent } from "@/lib/cms";
 
 export const metadata: Metadata = {
@@ -26,7 +25,7 @@ export default async function SupportPage() {
           <span className="eyebrow light">SOPORTE ROCKSPACEHN</span>
           <h1>¿Qué necesita resolver?</h1>
           <p>Empiece por la guía de su equipo. Si el problema continúa, escriba directamente a soporte técnico.</p>
-          <a className="button button-white" href={supportUrl(`Hola ${support.advisor}, necesito soporte técnico de Rock Space.`)} target="_blank" rel="noreferrer">Hablar con {support.advisor}</a>
+          <a className="button button-white" href={supportUrl("Hola, necesito soporte técnico de Rock Space.")} target="_blank" rel="noreferrer">Hablar con soporte</a>
         </div>
       </section>
 
@@ -69,9 +68,9 @@ export default async function SupportPage() {
       </section>
 
       <section className="contact-panel shell">
-        <div><span className="eyebrow">CONTACTO DIRECTO</span><h2>{support.advisor}</h2><p>Asesor técnico Rock Space Honduras · {support.instagramHandle}</p></div>
+        <div><span className="eyebrow">CONTACTO DIRECTO</span><h2>Nuestro equipo de expertos Rock Space</h2><p>Soporte técnico oficial en Honduras · {support.instagramHandle}</p></div>
         <div className="button-row">
-          <a className="button button-primary" href={supportUrl(`Hola ${support.advisor}, necesito soporte técnico de Rock Space.`)} target="_blank" rel="noreferrer">Abrir WhatsApp</a>
+          <a className="button button-primary" href={supportUrl("Hola, necesito soporte técnico de Rock Space.")} target="_blank" rel="noreferrer">Abrir WhatsApp</a>
         </div>
       </section>
     </>

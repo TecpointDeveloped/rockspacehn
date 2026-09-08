@@ -8,7 +8,7 @@ import { getCmsContent } from "@/lib/cms";
 
 export const metadata: Metadata = {
   title: "Láminas",
-  description: "Tipos de láminas de protección compatibles con soluciones Rock Space."
+  description: "Láminas frontales Rock Space disponibles en Honduras, con acabados, beneficios y especificaciones."
 };
 
 export const revalidate = 60;
@@ -19,22 +19,26 @@ export default async function FilmsPage() {
     <>
       <section className="page-hero shell narrow-hero">
         <span className="eyebrow">LÁMINAS ROCK SPACE</span>
-        <h1>El protector cambia. La máquina sigue siendo la misma.</h1>
-        <p>Ofrezca diferentes acabados según lo que busca cada cliente y corte la plantilla cuando la necesita.</p>
+        <h1>Láminas frontales para cada necesidad.</h1>
+        <p>Conozca los tipos disponibles en Honduras y compare sus acabados, funciones y especificaciones.</p>
       </section>
 
       <section className="section shell film-catalog">
         {cms.films.map((film, index) => (
           <article className={`film-catalog-card ${index % 2 ? "reverse" : ""}`} key={film.name}>
             <div className={`film-product-image film-${film.tone}`}>
-              <Image src={film.image} alt={film.alt} width={1100} height={860} quality={88} sizes="(max-width: 920px) 92vw, 560px" />
+              <Image src={film.image} alt={film.alt} width={1100} height={860} quality={88} priority={index === 0} sizes="(max-width: 920px) 92vw, 560px" />
             </div>
             <div className="film-catalog-copy">
-              <span className="eyebrow">TIPO DE PELÍCULA</span>
+              <span className="eyebrow">{film.category}</span>
               <h2>{film.name}</h2>
               <h3>{film.short}</h3>
               <p>{film.description}</p>
               <ul>{film.benefits.map((benefit) => <li key={benefit}>✓ {benefit}</li>)}</ul>
+              <dl className="film-spec-list">
+                {film.specs.map((spec) => <div key={spec.label}><dt>{spec.label}</dt><dd>{spec.value}</dd></div>)}
+              </dl>
+              <span className="film-availability">{film.availability}</span>
             </div>
           </article>
         ))}
@@ -42,7 +46,7 @@ export default async function FilmsPage() {
 
       <section className="section shell">
         <SectionHeading eyebrow="ANTES DE CORTAR" title="Compatibilidad primero.">
-          <p>El material disponible y el tamaño recomendado pueden variar según el equipo y el dispositivo. Confirme la película antes de ejecutar el corte.</p>
+          <p>El material y el tamaño recomendado pueden variar según el equipo y el dispositivo. Consulte existencias actuales y confirme la compatibilidad antes del corte.</p>
         </SectionHeading>
         <div className="compatibility-cards">
           <div><strong>MINI ZV2</strong><span>Teléfonos + tablets hasta 11&quot;</span></div>

@@ -27,7 +27,7 @@ Aquí cambia:
 ### Contacto
 `lib/site.ts`
 
-Aquí cambia WhatsApp, Instagram, asesor y dominio.
+Aquí cambia WhatsApp, Instagram y dominio. El soporte público se presenta como el equipo de expertos Rock Space.
 
 ### Diseño
 `app/globals.css`

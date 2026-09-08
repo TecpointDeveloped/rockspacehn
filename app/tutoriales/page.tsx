@@ -3,7 +3,7 @@ import Link from "next/link";
 import { VideoEmbed } from "@/components/VideoEmbed";
 import { machines } from "@/data/machines";
 import { stickerMachine } from "@/data/stickerMachine";
-import { SITE, whatsappUrl } from "@/lib/site";
+import { whatsappUrl } from "@/lib/site";
 import { getCmsContent } from "@/lib/cms";
 
 export const metadata: Metadata = {
@@ -23,7 +23,7 @@ export default async function TutorialsPage() {
       <section className="page-hero shell narrow-hero">
         <span className="eyebrow">CENTRO DE TUTORIALES</span>
         <h1>Aprenda a usar cada equipo aquí mismo.</h1>
-        <p>RCL1005 primero, seguido de las plotters de protección. Videos, pasos y acceso a soporte en una sola biblioteca.</p>
+        <p>Guías para RCL1005, MINI ZV2, ZC1 Max y ZC5, con videos, pasos y acceso a soporte en una sola biblioteca.</p>
       </section>
 
       <nav className="tutorial-nav shell" aria-label="Temas del centro de aprendizaje">
@@ -65,8 +65,8 @@ export default async function TutorialsPage() {
       </section>
 
       <section className="support-cta shell">
-        <div><span className="eyebrow light">¿NO ENCONTRÓ SU RESPUESTA?</span><h2>Soporte técnico con {SITE.advisor}.</h2><p>Envíe el modelo del equipo, una foto o una descripción del problema.</p></div>
-        <a className="button button-white" href={whatsappUrl("Hola Benjamín, necesito ayuda con mi equipo Rock Space.")} target="_blank" rel="noreferrer">Abrir WhatsApp</a>
+        <div><span className="eyebrow light">¿NO ENCONTRÓ SU RESPUESTA?</span><h2>Soporte con nuestro equipo de expertos Rock Space.</h2><p>Envíe el modelo del equipo, una foto o una descripción del problema.</p></div>
+        <a className="button button-white" href={whatsappUrl("Hola, necesito ayuda con mi equipo Rock Space.")} target="_blank" rel="noreferrer">Abrir WhatsApp</a>
       </section>
     </>
   );

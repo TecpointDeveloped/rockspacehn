@@ -22,17 +22,17 @@ export type CmsContent = {
   sticker: CmsSticker;
   machines: CmsMachine[];
   films: Film[];
-  support: { advisor: string; whatsappNumber: string; instagram: string; instagramHandle: string };
+  support: { whatsappNumber: string; instagram: string; instagramHandle: string };
   instagram: CmsInstagram;
   updatedAt?: string;
 };
 
 export const defaultCmsContent: CmsContent = {
   home: {
-    eyebrow: "ROCK SPACE HONDURAS · PERSONALIZACIÓN EN TIENDA",
-    title: "Una foto. Un sticker.",
-    accent: "En minutos.",
-    description: "La RCL1005 imprime y corta stickers personalizados desde un solo equipo. También crea skins, imprime fotos y corta protección frontal.",
+    eyebrow: "ROCK SPACE HONDURAS",
+    title: "Soluciones para crear, cortar y proteger.",
+    accent: "",
+    description: "Equipos, láminas frontales y acompañamiento para llevar la personalización bajo demanda a su negocio.",
     heroImage: stickerMachine.heroImage,
   },
   sticker: {
@@ -45,7 +45,7 @@ export const defaultCmsContent: CmsContent = {
     spanishSummary: machine.steps.map((step) => `${step.title}: ${step.text}`).join(" "),
   })),
   films,
-  support: { advisor: SITE.advisor, whatsappNumber: SITE.whatsappNumber, instagram: SITE.instagram, instagramHandle: SITE.instagramHandle },
+  support: { whatsappNumber: SITE.whatsappNumber, instagram: SITE.instagram, instagramHandle: SITE.instagramHandle },
   instagram: {
     enabled: true,
     handle: SITE.instagramHandle,
@@ -69,10 +69,11 @@ async function loadRemoteContent(): Promise<CmsContent> {
     const response = await fetch(blob.url, { cache: "no-store" });
     if (!response.ok) return defaultCmsContent;
     const saved = (await response.json()) as CmsContent;
+    const savedHomeIsStickerFirst = saved.home?.title === "Una foto. Un sticker." || saved.home?.accent === "En minutos.";
     const merged: CmsContent = {
       ...defaultCmsContent,
       ...saved,
-      home: { ...defaultCmsContent.home, ...saved.home },
+      home: savedHomeIsStickerFirst ? defaultCmsContent.home : { ...defaultCmsContent.home, ...saved.home },
       support: { ...defaultCmsContent.support, ...saved.support },
       instagram: {
         ...defaultCmsContent.instagram,
@@ -81,7 +82,7 @@ async function loadRemoteContent(): Promise<CmsContent> {
       },
       sticker: { ...defaultCmsContent.sticker, ...saved.sticker },
       machines: Array.isArray(saved.machines) ? saved.machines : defaultCmsContent.machines,
-      films: Array.isArray(saved.films) ? saved.films : defaultCmsContent.films,
+      films: Array.isArray(saved.films) ? saved.films.map((film) => ({ ...defaultCmsContent.films.find((item) => item.name === film.name), ...film })) as Film[] : defaultCmsContent.films,
     };
     return merged;
   } catch {

@@ -3,7 +3,7 @@
 
 ## Enfoque principal de esta versión
 
-La **RCL1005 AI Photo Sticker Printer and Cutter** es el centro de la experiencia: aparece en el hero del Home, tiene página propia en `/stickers`, tutorial integrado, galería, ficha técnica, flujo de uso, consumible SD21 y preguntas frecuentes. Las plotters MINI ZV2, ZC1 Max y ZC5 quedan como línea complementaria de protección bajo demanda.
+Rock Space Honduras y su ecosistema completo son el centro de la experiencia. La portada presenta con el mismo peso la **RCL1005**, **MINI ZV2**, **ZC1 Max**, **ZC5** y las láminas frontales disponibles. Cada línea conserva su página detallada, tutoriales y soporte.
 
 Proyecto nuevo de **Rock Space Honduras** construido con **Next.js 16.3.3 + React 19.2.8 + TypeScript**, usando App Router y CSS propio (sin Tailwind ni librerías visuales externas).
 
@@ -18,7 +18,7 @@ Proyecto nuevo de **Rock Space Honduras** construido con **Next.js 16.3.3 + Reac
 - Preguntas frecuentes.
 - Página de láminas.
 - Centro general de tutoriales.
-- Centro de soporte con Benjamín Leiva.
+- Centro de soporte con el equipo de expertos Rock Space.
 - CTA a WhatsApp en todo el sitio.
 - Instagram de ROCKSPACEHN.
 - SEO base, `sitemap.xml` y `robots.txt`.
@@ -80,14 +80,13 @@ Edite `lib/site.ts` para cambiar una sola vez:
 
 - WhatsApp
 - Instagram
-- nombre del asesor
 - dominio
 
 Actualmente configurado:
 
 - WhatsApp: `+504 9465-9287`
 - Instagram: `@rockspacehn`
-- Asesor técnico: `Benjamín Leiva`
+- Soporte técnico: equipo de expertos Rock Space
 - Dominio: `https://rockspacehn.com`
 
 ## Imágenes

@@ -11,8 +11,11 @@ export function FilmCategorySection({ id, title, description, products, dark = f
         <div className="catalog-product-grid">
           {products.map((product, index) => {
             const variants = availableVariants(product.variants || []);
+            const productImages = product.images?.length ? product.images : [product.image];
             return <article className="catalog-product" key={product.slug || product.name}>
-              <div className="catalog-product-image"><Image src={product.image} alt={product.alt} width={850} height={680} quality={88} priority={index === 0 && id === "flexible"} sizes="(max-width: 700px) 92vw, 44vw" /></div>
+              <div className={`catalog-product-image ${productImages.length > 1 ? "catalog-product-image-pair" : ""}`}>
+                {productImages.map((image, imageIndex) => <Image key={image} src={image} alt={imageIndex === 0 ? product.alt : `${product.name} ${variants[imageIndex]?.label || "presentación adicional"}`} width={1000} height={1000} quality={88} priority={index === 0 && imageIndex === 0 && id === "flexible"} sizes={productImages.length > 1 ? "(max-width: 700px) 82vw, 22vw" : "(max-width: 700px) 88vw, 40vw"} />)}
+              </div>
               <div className="catalog-product-copy"><span>{product.subcategory || product.category}</span><h3>{product.name}</h3><p>{product.short}</p><ul>{product.benefits.slice(0, 3).map((benefit) => <li key={benefit}>✓ {benefit}</li>)}</ul>
                 <dl className="catalog-product-specs">{product.specs.slice(0, 3).map((spec) => <div key={spec.label}><dt>{spec.label}</dt><dd>{spec.value}</dd></div>)}</dl>
                 {product.compatibility.length > 0 && <p className="catalog-compatibility"><b>Compatibilidad:</b> {product.compatibility.join(" · ")}</p>}

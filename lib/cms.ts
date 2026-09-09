@@ -87,7 +87,7 @@ async function loadRemoteContent(): Promise<CmsContent> {
       },
       sticker: { ...defaultCmsContent.sticker, ...saved.sticker },
       machines: Array.isArray(saved.machines) ? saved.machines : defaultCmsContent.machines,
-      films: Array.isArray(saved.films) ? saved.films.map((film, index) => {
+      films: Array.isArray(saved.films) && saved.films.some((film) => film.slug === "uv-high-definition-ts") ? saved.films.map((film, index) => {
         const baseline = defaultCmsContent.films.find((item) => item.name === film.name) || defaultCmsContent.films[index];
         const mergedFilm = { ...baseline, ...film } as Film;
         return {

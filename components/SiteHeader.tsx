@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
-import { SITE, whatsappUrl } from "@/lib/site";
+import { SITE, whatsappUrlFor } from "@/lib/site";
 
 const links = [
   { href: "/stickers", label: "Stickers" },
@@ -14,7 +14,7 @@ const links = [
   { href: "/soporte", label: "Soporte" }
 ];
 
-export function SiteHeader() {
+export function SiteHeader({ salesNumber = SITE.salesWhatsappNumber }: { salesNumber?: string }) {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
 
@@ -42,7 +42,7 @@ export function SiteHeader() {
           ))}
           <a
             className="nav-cta mobile-only"
-            href={whatsappUrl("Hola, quiero información de Rock Space Honduras.")}
+            href={whatsappUrlFor(salesNumber, "Hola, quiero información de Rock Space Honduras.")}
             target="_blank"
             rel="noreferrer"
           >
@@ -53,7 +53,7 @@ export function SiteHeader() {
         <div className="nav-actions">
           <a
             className="nav-cta desktop-only"
-            href={whatsappUrl("Hola, quiero información de Rock Space Honduras.")}
+            href={whatsappUrlFor(salesNumber, "Hola, quiero información de Rock Space Honduras.")}
             target="_blank"
             rel="noreferrer"
           >

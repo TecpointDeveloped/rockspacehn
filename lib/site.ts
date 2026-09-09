@@ -4,9 +4,21 @@ export const SITE = {
   url: "https://rockspacehn.com",
   instagram: "https://www.instagram.com/rockspacehn/",
   instagramHandle: "@rockspacehn",
-  whatsappNumber: "50494659287",
+  salesWhatsappNumber: "50494659287",
+  supportWhatsappNumber: "50498191003",
 };
 
-export function whatsappUrl(message: string) {
-  return `https://wa.me/${SITE.whatsappNumber}?text=${encodeURIComponent(message)}`;
+export function whatsappUrlFor(number: string, message: string) {
+  return `https://wa.me/${number}?text=${encodeURIComponent(message)}`;
 }
+
+export function salesWhatsappUrl(message: string) {
+  return whatsappUrlFor(SITE.salesWhatsappNumber, message);
+}
+
+export function supportWhatsappUrl(message: string) {
+  return whatsappUrlFor(SITE.supportWhatsappNumber, message);
+}
+
+/** Commercial alias kept for existing callers. */
+export const whatsappUrl = salesWhatsappUrl;

@@ -3,7 +3,7 @@ import Link from "next/link";
 import { VideoEmbed } from "@/components/VideoEmbed";
 import { machines } from "@/data/machines";
 import { stickerMachine } from "@/data/stickerMachine";
-import { whatsappUrl } from "@/lib/site";
+import { whatsappUrlFor } from "@/lib/site";
 import { getCmsContent } from "@/lib/cms";
 
 export const metadata: Metadata = {
@@ -16,7 +16,7 @@ export const revalidate = 60;
 export default async function TutorialsPage() {
   const cms = await getCmsContent();
   const s = cms.sticker || stickerMachine;
-  const visibleMachines = cms.machines.filter((machine) => machine.active !== false);
+  const visibleMachines = cms.machines;
 
   return (
     <>
@@ -66,7 +66,7 @@ export default async function TutorialsPage() {
 
       <section className="support-cta shell">
         <div><span className="eyebrow light">¿NO ENCONTRÓ SU RESPUESTA?</span><h2>Soporte con nuestro equipo de expertos Rock Space.</h2><p>Envíe el modelo del equipo, una foto o una descripción del problema.</p></div>
-        <a className="button button-white" href={whatsappUrl("Hola, necesito ayuda con mi equipo Rock Space.")} target="_blank" rel="noreferrer">Abrir WhatsApp</a>
+        <a className="button button-white" href={whatsappUrlFor(cms.support.supportWhatsappNumber, "Hola, necesito ayuda técnica con mi equipo Rock Space.")} target="_blank" rel="noreferrer">Abrir soporte técnico</a>
       </section>
     </>
   );

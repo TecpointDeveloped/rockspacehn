@@ -6,6 +6,7 @@ import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { WhatsAppFloat } from "@/components/WhatsAppFloat";
 import { SITE } from "@/lib/site";
+import { getCmsContent } from "@/lib/cms";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
@@ -33,15 +34,16 @@ export const metadata: Metadata = {
   }
 };
 
-export default function RootLayout({ children }: Readonly<{ children: ReactNode }>) {
+export default async function RootLayout({ children }: Readonly<{ children: ReactNode }>) {
+  const { support } = await getCmsContent();
   return (
     <html lang="es">
       <body>
         <a className="skip-link" href="#contenido">Saltar al contenido</a>
-        <SiteHeader />
+        <SiteHeader salesNumber={support.salesWhatsappNumber} />
         <main id="contenido">{children}</main>
-        <SiteFooter />
-        <WhatsAppFloat />
+        <SiteFooter salesNumber={support.salesWhatsappNumber} supportNumber={support.supportWhatsappNumber} />
+        <WhatsAppFloat salesNumber={support.salesWhatsappNumber} />
       </body>
     </html>
   );

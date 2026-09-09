@@ -4,7 +4,7 @@ import { MachineCard } from "@/components/MachineCard";
 import { SectionHeading } from "@/components/SectionHeading";
 import { SupportCTA } from "@/components/SupportCTA";
 import { machines } from "@/data/machines";
-import { whatsappUrl } from "@/lib/site";
+import { whatsappUrlFor } from "@/lib/site";
 import { getCmsContent } from "@/lib/cms";
 
 export const metadata: Metadata = {
@@ -16,7 +16,7 @@ export const revalidate = 60;
 
 export default async function MachinesPage() {
   const cms = await getCmsContent();
-  const visibleMachines = cms.machines.filter((machine) => machine.active !== false);
+  const visibleMachines = cms.machines;
   return (
     <>
       <section className="page-hero shell narrow-hero">
@@ -26,7 +26,7 @@ export default async function MachinesPage() {
       </section>
 
       <section className="section shell machine-grid">
-        {visibleMachines.map((machine, index) => <MachineCard key={machine.slug} machine={machine} index={index} />)}
+        {visibleMachines.map((machine, index) => <MachineCard key={machine.slug} machine={machine} index={index} salesNumber={cms.support.salesWhatsappNumber} />)}
       </section>
 
       <section className="section shell">
@@ -37,12 +37,13 @@ export default async function MachinesPage() {
               <tr><th>Característica</th>{visibleMachines.map((m) => <th key={m.slug}>{m.name}</th>)}</tr>
             </thead>
             <tbody>
-              <tr><td>Enfoque</td><td>Compacta</td><td>Formatos grandes</td><td>Automatización</td></tr>
-              <tr><td>Precisión</td><td>0.1 mm</td><td>0.1 mm</td><td>0.1 mm</td></tr>
-              <tr><td>Pantalla</td><td>5.5&quot;</td><td>5.5&quot;</td><td>7&quot; HD</td></tr>
-              <tr><td>Presión máx.</td><td>1200 g</td><td>1000 g</td><td>1500 g</td></tr>
-              <tr><td>Formato destacado</td><td>Tablet hasta 11&quot;</td><td>Laptop hasta 16&quot;</td><td>Tablet hasta 12.2&quot;</td></tr>
-              <tr><td>Automatización por QR</td><td>—</td><td>—</td><td>Sí</td></tr>
+              {[
+                { label: "Precisión", value: (name: string) => name === "Precisión" },
+                { label: "Pantalla", value: (name: string) => name === "Panel" },
+                { label: "Presión máxima", value: (name: string) => name.toLowerCase().includes("presión") },
+                { label: "Ancho de corte", value: (name: string) => name.toLowerCase().includes("ancho máx. de corte") },
+              ].map((row) => <tr key={row.label}><td>{row.label}</td>{visibleMachines.map((machine) => <td key={machine.slug}>{machine.specs.find((spec) => row.value(spec.label))?.value || "Consultar ficha"}</td>)}</tr>)}
+              <tr><td>Usos compatibles</td>{visibleMachines.map((machine) => <td key={machine.slug}>{machine.compatibleFilms.slice(0, 3).join(" · ")}</td>)}</tr>
               <tr><td></td>{visibleMachines.map((m) => <td key={m.slug}><Link className="table-link" href={`/maquinas/${m.slug}`}>Ver ficha →</Link></td>)}</tr>
             </tbody>
           </table>
@@ -51,7 +52,7 @@ export default async function MachinesPage() {
 
       <section className="decision-strip shell">
         <div><span className="eyebrow">¿NO SABE CUÁL ELEGIR?</span><h2>Cuéntenos qué vende y cuánto espacio tiene.</h2></div>
-        <a className="button button-primary" href={whatsappUrl("Hola, necesito ayuda para elegir entre MINI ZV2, ZC1 Max y ZC5.")} target="_blank" rel="noreferrer">Ayudarme a elegir</a>
+        <a className="button button-primary" href={whatsappUrlFor(cms.support.salesWhatsappNumber, "Hola, necesito ayuda para elegir entre MINI ZV2, ZC1 Max y ZC5.")} target="_blank" rel="noreferrer">Ayudarme a elegir</a>
       </section>
 
       <SupportCTA />

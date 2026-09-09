@@ -1,15 +1,15 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import { whatsappUrl } from "@/lib/site";
+import { SITE, whatsappUrlFor } from "@/lib/site";
 
-export function WhatsAppFloat() {
+export function WhatsAppFloat({ salesNumber = SITE.salesWhatsappNumber }: { salesNumber?: string }) {
   const pathname = usePathname();
   if (pathname.startsWith("/admin")) return null;
   return (
     <a
       className="whatsapp-float"
-      href={whatsappUrl("Hola, quiero información sobre Rock Space Honduras.")}
+      href={whatsappUrlFor(salesNumber, "Hola, quiero información sobre Rock Space Honduras.")}
       target="_blank"
       rel="noreferrer"
       aria-label="Abrir WhatsApp"

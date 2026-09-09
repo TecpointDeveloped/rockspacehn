@@ -78,15 +78,16 @@ Esto es intencional: es mejor dejar un slot correcto que incrustar un video equi
 
 Edite `lib/site.ts` para cambiar una sola vez:
 
-- WhatsApp
+- WhatsApp de ventas
+- WhatsApp de soporte técnico
 - Instagram
 - dominio
 
 Actualmente configurado:
 
-- WhatsApp: `+504 9465-9287`
+- Atención al cliente y ventas: `+504 9465-9287`
+- Soporte técnico: `+504 9819-1003`
 - Instagram: `@rockspacehn`
-- Soporte técnico: equipo de expertos Rock Space
 - Dominio: `https://rockspacehn.com`
 
 ## Imágenes

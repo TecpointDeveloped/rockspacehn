@@ -6,7 +6,7 @@ import { SupportCTA } from "@/components/SupportCTA";
 import { VideoEmbed } from "@/components/VideoEmbed";
 import { LearningPath } from "@/components/LearningPath";
 import { stickerMachine } from "@/data/stickerMachine";
-import { whatsappUrl } from "@/lib/site";
+import { whatsappUrlFor } from "@/lib/site";
 import { getCmsContent } from "@/lib/cms";
 
 export const metadata: Metadata = {
@@ -24,7 +24,8 @@ export const metadata: Metadata = {
 export const revalidate = 60;
 
 export default async function StickersPage() {
-  const s = (await getCmsContent()).sticker || stickerMachine;
+  const cms = await getCmsContent();
+  const s = cms.sticker || stickerMachine;
   const learningItems = [
     { label: "Cómo funciona", title: "Vea el flujo completo", text: "Conozca cómo una foto se convierte en una hoja impresa y cortada desde el mismo equipo." },
     { label: "Configuración inicial", title: "Prepare equipo y SD21", text: "Ubique la RCL1005 en un mostrador estable, conecte la red y cargue los consumibles dedicados." },
@@ -43,7 +44,7 @@ export default async function StickersPage() {
             <h2>{s.tagline}</h2>
             <p>{s.description}</p>
             <div className="button-row">
-              <a className="button button-white" href={whatsappUrl("Hola, quiero información y disponibilidad de la RCL1005 para stickers personalizados.")} target="_blank" rel="noreferrer">Consultar RCL1005</a>
+              <a className="button button-white" href={whatsappUrlFor(cms.support.salesWhatsappNumber, "Hola, quiero información y disponibilidad de la RCL1005 para stickers personalizados.")} target="_blank" rel="noreferrer">Consultar RCL1005</a>
               <a className="button button-ghost-light" href="#tutorial">Ver cómo funciona</a>
             </div>
           </div>
@@ -139,7 +140,7 @@ export default async function StickersPage() {
           <h2>{s.consumable.name}</h2>
           <p>{s.consumable.text}</p>
           <div className="consumable-number"><strong>36</strong><span>impresiones por set</span></div>
-          <a className="button button-primary full-button" href={whatsappUrl("Hola, quiero información sobre consumibles SD21 para la RCL1005.")} target="_blank" rel="noreferrer">Consultar consumibles</a>
+          <a className="button button-primary full-button" href={whatsappUrlFor(cms.support.salesWhatsappNumber, "Hola, quiero información sobre consumibles SD21 para la RCL1005.")} target="_blank" rel="noreferrer">Consultar consumibles</a>
         </aside>
       </section>
 
@@ -151,7 +152,7 @@ export default async function StickersPage() {
       </section>
 
       <div className="shell back-link"><Link className="text-link" href="/">← Volver al inicio</Link></div>
-      <SupportCTA />
+      <SupportCTA machineName="RCL1005" />
     </>
   );
 }

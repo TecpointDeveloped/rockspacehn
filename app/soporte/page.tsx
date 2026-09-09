@@ -16,7 +16,7 @@ export default async function SupportPage() {
   const cms = await getCmsContent();
   const s = cms.sticker || stickerMachine;
   const support = cms.support;
-  const supportUrl = (message: string) => `https://wa.me/${support.whatsappNumber}?text=${encodeURIComponent(message)}`;
+  const supportUrl = (message: string) => `https://wa.me/${support.supportWhatsappNumber}?text=${encodeURIComponent(message)}`;
 
   return (
     <>
@@ -35,7 +35,7 @@ export default async function SupportPage() {
             <Image src={s.heroImage} alt="RCL1005" width={760} height={620} sizes="(max-width: 640px) 100vw, (max-width: 920px) 50vw, 25vw" />
             <div><span>Stickers · guía y tutorial</span><h2>RCL1005</h2><b>Abrir →</b></div>
           </Link>
-          {cms.machines.filter((machine) => machine.active !== false).map((machine) => (
+          {cms.machines.map((machine) => (
             <Link className="support-machine-card" href={`/maquinas/${machine.slug}#tutorial`} key={machine.slug}>
               <Image src={machine.image} alt={machine.name} width={760} height={620} sizes="(max-width: 640px) 100vw, (max-width: 920px) 50vw, 25vw" />
               <div><span>Protección · guía y tutorial</span><h2>{machine.name}</h2><b>Abrir →</b></div>

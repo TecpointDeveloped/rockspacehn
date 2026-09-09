@@ -27,10 +27,10 @@ Aquí cambia:
 ### Contacto
 `lib/site.ts`
 
-Aquí cambia WhatsApp, Instagram y dominio. El soporte público se presenta como el equipo de expertos Rock Space.
+Aquí cambia el WhatsApp comercial, el WhatsApp de soporte técnico, Instagram y dominio. El soporte público se presenta como el equipo de expertos Rock Space.
 
 ### Diseño
-`app/globals.css`
+`app/globals.css` y `app/balanced.css`
 
 Toda la identidad visual está centralizada ahí.
 
@@ -59,4 +59,4 @@ La prioridad no es solo vender la máquina: la web funciona también como centro
 
 ## Página central
 - `/stickers`: RCL1005, galería, especificaciones, tutorial y consumibles.
-- El Home prioriza RCL1005 antes que las plotters.
+- El Home presenta un carrusel automático con todas las máquinas y mantiene la RCL1005 como solución protagonista de personalización.

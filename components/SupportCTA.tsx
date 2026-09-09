@@ -1,7 +1,9 @@
 import Link from "next/link";
-import { whatsappUrl } from "@/lib/site";
+import { getCmsContent } from "@/lib/cms";
+import { whatsappUrlFor } from "@/lib/site";
 
-export function SupportCTA() {
+export async function SupportCTA({ machineName }: { machineName?: string }) {
+  const { support } = await getCmsContent();
   return (
     <section className="support-cta shell">
       <div>
@@ -10,7 +12,7 @@ export function SupportCTA() {
         <p>Tutoriales, guías rápidas y acompañamiento técnico con nuestro equipo de expertos Rock Space.</p>
       </div>
       <div className="cta-stack">
-        <a className="button button-white" href={whatsappUrl("Hola, necesito soporte técnico con mi máquina Rock Space.")} target="_blank" rel="noreferrer">Hablar por WhatsApp</a>
+        <a className="button button-white" href={whatsappUrlFor(support.supportWhatsappNumber, machineName ? `Hola, ya tengo una ${machineName} y necesito soporte técnico.` : "Hola, necesito soporte técnico con mi máquina Rock Space.")} target="_blank" rel="noreferrer">Solicitar soporte técnico</a>
         <Link className="button button-ghost-light" href="/soporte">Centro de soporte</Link>
       </div>
     </section>

@@ -22,7 +22,7 @@ export type CmsContent = {
   sticker: CmsSticker;
   machines: CmsMachine[];
   films: Film[];
-  support: { whatsappNumber: string; instagram: string; instagramHandle: string };
+  support: { salesWhatsappNumber: string; supportWhatsappNumber: string; instagram: string; instagramHandle: string };
   instagram: CmsInstagram;
   updatedAt?: string;
 };
@@ -45,7 +45,7 @@ export const defaultCmsContent: CmsContent = {
     spanishSummary: machine.steps.map((step) => `${step.title}: ${step.text}`).join(" "),
   })),
   films,
-  support: { whatsappNumber: SITE.whatsappNumber, instagram: SITE.instagram, instagramHandle: SITE.instagramHandle },
+  support: { salesWhatsappNumber: SITE.salesWhatsappNumber, supportWhatsappNumber: SITE.supportWhatsappNumber, instagram: SITE.instagram, instagramHandle: SITE.instagramHandle },
   instagram: {
     enabled: true,
     handle: SITE.instagramHandle,
@@ -74,7 +74,12 @@ async function loadRemoteContent(): Promise<CmsContent> {
       ...defaultCmsContent,
       ...saved,
       home: savedHomeIsStickerFirst ? defaultCmsContent.home : { ...defaultCmsContent.home, ...saved.home },
-      support: { ...defaultCmsContent.support, ...saved.support },
+      support: {
+        ...defaultCmsContent.support,
+        ...saved.support,
+        salesWhatsappNumber: saved.support?.salesWhatsappNumber || defaultCmsContent.support.salesWhatsappNumber,
+        supportWhatsappNumber: saved.support?.supportWhatsappNumber || defaultCmsContent.support.supportWhatsappNumber,
+      },
       instagram: {
         ...defaultCmsContent.instagram,
         ...saved.instagram,
@@ -82,7 +87,18 @@ async function loadRemoteContent(): Promise<CmsContent> {
       },
       sticker: { ...defaultCmsContent.sticker, ...saved.sticker },
       machines: Array.isArray(saved.machines) ? saved.machines : defaultCmsContent.machines,
-      films: Array.isArray(saved.films) ? saved.films.map((film) => ({ ...defaultCmsContent.films.find((item) => item.name === film.name), ...film })) as Film[] : defaultCmsContent.films,
+      films: Array.isArray(saved.films) ? saved.films.map((film, index) => {
+        const baseline = defaultCmsContent.films.find((item) => item.name === film.name) || defaultCmsContent.films[index];
+        const mergedFilm = { ...baseline, ...film } as Film;
+        return {
+          ...mergedFilm,
+          slug: mergedFilm.slug || film.name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, ""),
+          categoryKey: mergedFilm.categoryKey || "flexible",
+          stock: Number(mergedFilm.stock) || 0,
+          variants: Array.isArray(mergedFilm.variants) ? mergedFilm.variants : [],
+          compatibility: Array.isArray(mergedFilm.compatibility) ? mergedFilm.compatibility : [],
+        } as Film;
+      }) : defaultCmsContent.films,
     };
     return merged;
   } catch {

@@ -30,7 +30,7 @@ export const machines: Machine[] = [
     tagline: "Corte profesional en un formato mucho más compacto.",
     description:
       "La MINI ZV2 está pensada para tiendas que quieren cortar protectores de teléfonos y tablets bajo demanda sin ocupar demasiado espacio. Integra alimentación automática de película, pantalla táctil, Wi‑Fi y Bluetooth.",
-    image: "/images/products/mini-zv2.webp",
+    image: "/images/products/mini-zv2-white-v2.png",
     gallery: [
       { src: "/images/products/mini-zv2-feed.webp", alt: "MINI ZV2 con alimentación automática de película" },
       { src: "/images/products/mini-zv2-counter.webp", alt: "MINI ZV2 en mostrador compacto" },
@@ -117,7 +117,7 @@ export const machines: Machine[] = [
     tagline: "Una estación de corte para tiendas que necesitan cubrir mucho más.",
     description:
       "La ZC1 Max amplía el formato de trabajo para teléfonos, tablets, relojes, consolas, cámaras y laptops de hasta 16 pulgadas. Su pantalla táctil integrada y conexión Wi‑Fi permiten trabajar desde la máquina.",
-    image: "/images/products/zc1-max.webp",
+    image: "/images/products/zc1-max-white-v2.png",
     gallery: [
       { src: "/images/products/zc1-formats.webp", alt: "ZC1 Max y compatibilidad de formatos" },
       { src: "/images/products/zc1-devices.webp", alt: "Compatibilidad ZC1 Max con tablets y laptops" },
@@ -204,7 +204,7 @@ export const machines: Machine[] = [
     tagline: "Escanee la película. Ajuste automático. Corte preciso.",
     description:
       "La ZC5 incorpora cámara para leer el QR de películas compatibles y ajustar automáticamente parámetros de presión y profundidad. Tiene pantalla HD de 7 pulgadas, Wi‑Fi de doble banda y una biblioteca de más de 65,000 plantillas.",
-    image: "/images/products/zc5.webp",
+    image: "/images/products/zc5-white-v2.png",
     gallery: [
       { src: "/images/products/zc5-recognition.webp", alt: "ZC5 con reconocimiento inteligente de película" },
       { src: "/images/products/zc5-hybrid.webp", alt: "ZC5 cortando película híbrida" },

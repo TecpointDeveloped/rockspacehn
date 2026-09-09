@@ -24,9 +24,10 @@ export function VideoEmbed({ youtubeId, title, spanishSummary }: { youtubeId?: s
         src={`https://www.youtube-nocookie.com/embed/${youtubeId}?autoplay=1&rel=0&playsinline=1&cc_load_policy=1&cc_lang_pref=es&hl=es`}
         title={`${title}. Subtítulos en español activados`}
         allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+        loading="lazy"
         allowFullScreen
       /> : <button className="video-poster" onClick={() => setPlaying(true)} aria-label={`Reproducir ${title} con subtítulos en español`}>
-        <img src={`https://i.ytimg.com/vi/${youtubeId}/hqdefault.jpg`} alt="" loading="lazy" />
+        <img src={`https://i.ytimg.com/vi/${youtubeId}/hqdefault.jpg`} alt="" width="480" height="360" loading="lazy" decoding="async" fetchPriority="low" />
         <span className="video-play" aria-hidden="true">▶</span>
         <strong>Reproducir con subtítulos en español</strong>
       </button>}

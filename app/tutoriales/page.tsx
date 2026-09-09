@@ -1,7 +1,5 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import { VideoEmbed } from "@/components/VideoEmbed";
-import { machines } from "@/data/machines";
+import { TutorialHub } from "@/components/TutorialHub";
 import { stickerMachine } from "@/data/stickerMachine";
 import { whatsappUrlFor } from "@/lib/site";
 import { getCmsContent } from "@/lib/cms";
@@ -17,6 +15,10 @@ export default async function TutorialsPage() {
   const cms = await getCmsContent();
   const s = cms.sticker || stickerMachine;
   const visibleMachines = cms.machines;
+  const tutorialItems = [
+    { id: "rcl1005", name: "RCL1005", label: "Impresión y corte", image: s.heroImage, href: "/stickers#tutorial", youtubeId: s.youtubeId, videoLabel: s.videoLabel, summary: s.spanishSummary, steps: s.steps },
+    ...visibleMachines.map((machine) => ({ id: machine.slug, name: machine.name, label: "Corte de protección", image: machine.image, href: `/maquinas/${machine.slug}#tutorial`, youtubeId: machine.youtubeId, videoLabel: machine.videoLabel, summary: machine.spanishSummary, steps: machine.steps }))
+  ];
 
   return (
     <>
@@ -30,33 +32,7 @@ export default async function TutorialsPage() {
         <span>Cómo funciona</span><span>Configuración inicial</span><span>Primer trabajo</span><span>Mantenimiento</span><span>Solución de problemas</span>
       </nav>
 
-      <section className="section shell tutorial-library sticker-tutorial-library">
-        <article className="tutorial-library-item tutorial-library-featured">
-          <div className="tutorial-library-head">
-            <div><span className="eyebrow">RCL1005 · STICKERS</span><h2>De una foto al sticker terminado</h2></div>
-            <Link className="text-link" href="/stickers#tutorial">Abrir guía completa →</Link>
-          </div>
-          <VideoEmbed youtubeId={s.youtubeId} title={s.videoLabel} spanishSummary={s.spanishSummary} />
-          <div className="tutorial-topic-grid tutorial-topic-grid-five">
-            {s.steps.map((step) => <div key={step.title}><strong>{step.title}</strong><span>{step.text}</span></div>)}
-          </div>
-        </article>
-
-        <div className="tutorial-divider"><span>PROTECCIÓN DE PANTALLA</span></div>
-
-        {visibleMachines.map((machine) => (
-          <article className="tutorial-library-item" key={machine.slug}>
-            <div className="tutorial-library-head">
-              <div><span className="eyebrow">{machine.name}</span><h2>Primer uso y funcionamiento</h2></div>
-              <Link className="text-link" href={`/maquinas/${machine.slug}#tutorial`}>Abrir guía completa →</Link>
-            </div>
-            <VideoEmbed youtubeId={machine.youtubeId} title={machine.videoLabel} spanishSummary={machine.spanishSummary} />
-            <div className="tutorial-topic-grid">
-              {machine.steps.map((step) => <div key={step.title}><strong>{step.title}</strong><span>{step.text}</span></div>)}
-            </div>
-          </article>
-        ))}
-      </section>
+      <TutorialHub items={tutorialItems} />
 
       <section className="tutorial-upload-note shell">
         <span className="eyebrow">TODO EN ROCKSPACEHN</span>

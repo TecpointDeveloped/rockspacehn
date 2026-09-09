@@ -6,7 +6,7 @@ export const stickerMachine = {
   tagline: "Convierta una foto en stickers personalizados en minutos.",
   description:
     "La RCL1005 integra impresión por sublimación y corte de contorno en un solo equipo de escritorio. Permite crear stickers personalizados, skins traseras, fotos, foto carnet y también cortar protectores frontales, sin depender de una computadora externa para el flujo diario.",
-  heroImage: "/images/products/rcl1005-hero.webp",
+  heroImage: "/images/products/rcl1005-white-v2.png",
   youtubeId: "ZOMDXgjyqPk",
   videoLabel: "Tutorial y demostración RCL1005",
   gallery: [

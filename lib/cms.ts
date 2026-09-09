@@ -85,8 +85,16 @@ async function loadRemoteContent(): Promise<CmsContent> {
         ...saved.instagram,
         posts: Array.isArray(saved.instagram?.posts) ? saved.instagram.posts : defaultCmsContent.instagram.posts,
       },
-      sticker: { ...defaultCmsContent.sticker, ...saved.sticker },
-      machines: Array.isArray(saved.machines) ? saved.machines : defaultCmsContent.machines,
+      sticker: {
+        ...defaultCmsContent.sticker,
+        ...saved.sticker,
+        heroImage: saved.sticker?.heroImage === "/images/products/rcl1005-hero.webp" ? defaultCmsContent.sticker.heroImage : (saved.sticker?.heroImage || defaultCmsContent.sticker.heroImage),
+      },
+      machines: Array.isArray(saved.machines) ? saved.machines.map((machine) => {
+        const baseline = defaultCmsContent.machines.find((item) => item.slug === machine.slug);
+        const legacyImages = ["/images/products/mini-zv2.webp", "/images/products/zc1-max.webp", "/images/products/zc5.webp"];
+        return baseline ? { ...baseline, ...machine, image: legacyImages.includes(machine.image) ? baseline.image : machine.image } : machine;
+      }) : defaultCmsContent.machines,
       films: Array.isArray(saved.films) && saved.films.some((film) => film.slug === "uv-high-definition-ts") ? saved.films.map((film, index) => {
         const baseline = defaultCmsContent.films.find((item) => item.name === film.name) || defaultCmsContent.films[index];
         const mergedFilm = { ...baseline, ...film } as Film;

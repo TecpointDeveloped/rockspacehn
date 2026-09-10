@@ -32,7 +32,7 @@ export function SiteHeader({ salesNumber = SITE.salesWhatsappNumber }: { salesNu
     <header className="site-header">
       <div className="nav-shell">
         <Link className="brand" href="/" aria-label="Rock Space Honduras - Inicio" onClick={() => setOpen(false)}>
-          <Image className="official-brand-logo" src="/brand/rock-space-honduras.png" alt="" width={52} height={52} priority />
+          <Image className="official-brand-logo" src="/brand/rock-space-honduras.png" alt="" width={72} height={72} priority />
           <span className="brand-copy"><strong>rock space</strong><small>HONDURAS</small></span>
         </Link>
 

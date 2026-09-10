@@ -7,7 +7,7 @@ import { getCmsContent } from "@/lib/cms";
 
 export const metadata: Metadata = {
   title: "Soporte",
-  description: "Soporte técnico y guías para RCL1005, MINI ZV2, ZC1 Max y ZC5 en Honduras."
+  description: "Ventas, soporte técnico y guías para equipos Rock Space en Honduras."
 };
 
 export const revalidate = 60;
@@ -38,7 +38,7 @@ export default async function SupportPage() {
           {cms.machines.map((machine) => (
             <Link className="support-machine-card" href={`/maquinas/${machine.slug}#tutorial`} key={machine.slug}>
               <Image src={machine.image} alt={machine.name} width={760} height={620} sizes="(max-width: 640px) 100vw, (max-width: 920px) 50vw, 25vw" />
-              <div><span>Protección · guía y tutorial</span><h2>{machine.name}</h2><b>Abrir →</b></div>
+              <div><span>Equipo · guía y tutorial</span><h2>{machine.name}</h2><b>Abrir →</b></div>
             </Link>
           ))}
         </div>
@@ -50,7 +50,7 @@ export default async function SupportPage() {
           <h2>Envíe estos datos para resolver más rápido.</h2>
         </div>
         <ol>
-          <li><b>Modelo del equipo.</b><span>RCL1005, MINI ZV2, ZC1 Max o ZC5.</span></li>
+          <li><b>Modelo del equipo.</b><span>Indique el nombre exacto que aparece en la máquina o en su ficha.</span></li>
           <li><b>Qué estaba intentando hacer.</b><span>Subir foto, imprimir, cortar, buscar modelo, alimentar película, calibrar, conectar Wi‑Fi, etc.</span></li>
           <li><b>Foto o video corto.</b><span>Si aparece un mensaje o el resultado sale mal, muéstrelo.</span></li>
           <li><b>Consumible o material.</b><span>Para RCL1005 indique SD21; para plotters, nombre y tamaño de la película.</span></li>

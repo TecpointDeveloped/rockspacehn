@@ -6,7 +6,7 @@ import { getCmsContent } from "@/lib/cms";
 
 export const metadata: Metadata = {
   title: "Tutoriales",
-  description: "Centro de tutoriales Rock Space Honduras para RCL1005, MINI ZV2, ZC1 Max y ZC5."
+  description: "Centro de tutoriales para las máquinas y soluciones de Rock Space Honduras."
 };
 
 export const revalidate = 60;
@@ -17,7 +17,7 @@ export default async function TutorialsPage() {
   const visibleMachines = cms.machines;
   const tutorialItems = [
     { id: "rcl1005", name: "RCL1005", label: "Impresión y corte", image: s.heroImage, href: "/stickers#tutorial", youtubeId: s.youtubeId, videoLabel: s.videoLabel, summary: s.spanishSummary, steps: s.steps },
-    ...visibleMachines.map((machine) => ({ id: machine.slug, name: machine.name, label: "Corte de protección", image: machine.image, href: `/maquinas/${machine.slug}#tutorial`, youtubeId: machine.youtubeId, videoLabel: machine.videoLabel, summary: machine.spanishSummary, steps: machine.steps }))
+    ...visibleMachines.map((machine) => ({ id: machine.slug, name: machine.name, label: machine.slug === "smart-vacuum-uv" ? "Curado UV al vacío" : machine.slug === "heat-transfer-110v" ? "Transferencia térmica" : "Corte de protección", image: machine.image, href: `/maquinas/${machine.slug}#tutorial`, youtubeId: machine.youtubeId, videoLabel: machine.videoLabel, summary: machine.spanishSummary, steps: machine.steps }))
   ];
 
   return (
@@ -25,7 +25,7 @@ export default async function TutorialsPage() {
       <section className="page-hero shell narrow-hero">
         <span className="eyebrow">CENTRO DE TUTORIALES</span>
         <h1>Aprenda a usar cada equipo aquí mismo.</h1>
-        <p>Guías para RCL1005, MINI ZV2, ZC1 Max y ZC5, con videos, pasos y acceso a soporte en una sola biblioteca.</p>
+        <p>Guías para todas las máquinas Rock Space disponibles, con videos, pasos y acceso a soporte en una sola biblioteca.</p>
       </section>
 
       <nav className="tutorial-nav shell" aria-label="Temas del centro de aprendizaje">

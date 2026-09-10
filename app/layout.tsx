@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     template: "%s | Rock Space Honduras"
   },
   description: "Máquinas Rock Space, láminas frontales, personalización, tutoriales y soporte técnico en Honduras.",
-  icons: { icon: "/brand/rock-space-honduras.png", apple: "/brand/rock-space-honduras.png" },
+  icons: { icon: "/favicon.svg", shortcut: "/favicon.svg", apple: "/brand/rock-space-honduras.png" },
   alternates: { canonical: "/" },
   openGraph: {
     type: "website",

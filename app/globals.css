@@ -49,22 +49,22 @@ main { overflow: hidden; }
 .nav-shell {
   width: min(calc(100% - 40px), var(--shell));
   margin-inline: auto;
-  min-height: 70px;
+  min-height: 86px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 24px;
 }
-.brand { display: inline-flex; align-items: center; gap: 10px; flex: 0 0 auto; }
-.official-brand-logo { width:46px; height:46px; flex:0 0 46px; border-radius:50%; object-fit:cover; box-shadow:0 0 0 1px rgba(16,18,20,.07); }
-.footer-logo { width:74px; height:74px; flex-basis:74px; }
+.brand { display: inline-flex; align-items: center; gap: 14px; flex: 0 0 auto; }
+.official-brand-logo { width:66px; height:66px; flex:0 0 66px; border-radius:50%; clip-path:circle(49.2%); object-fit:cover; box-shadow:0 7px 22px rgba(11,129,149,.18),0 0 0 1px rgba(16,18,20,.07); }
+.footer-logo { width:88px; height:88px; flex-basis:88px; }
 .brand-mark { width: 28px; height: 28px; position: relative; display: inline-block; }
 .brand-mark i { position: absolute; left: 1px; width: 26px; height: 10px; border-radius: 2px; background: var(--accent); transform: skewX(-35deg); }
 .brand-mark i:first-child { top: 3px; }
 .brand-mark i:last-child { bottom: 3px; }
 .brand-copy { display: flex; flex-direction: column; line-height: 1; }
-.brand-copy strong { font-size: 18px; letter-spacing: -0.6px; text-transform: lowercase; }
-.brand-copy small { margin-top: 4px; font-size: 8px; letter-spacing: 2px; color: var(--muted); font-weight: 800; }
+.brand-copy strong { font-size: 22px; letter-spacing: -0.8px; text-transform: lowercase; }
+.brand-copy small { margin-top: 5px; font-size: 9px; letter-spacing: 2.8px; color: var(--muted); font-weight: 850; }
 .main-nav { display: flex; align-items: center; gap: 30px; color: #3d454b; font-size: 14px; font-weight: 650; }
 .main-nav a { transition: color .2s ease; }
 .main-nav a:hover { color: var(--accent-dark); }
@@ -324,7 +324,7 @@ main { overflow: hidden; }
 @media (max-width: 640px) {
   .shell { width: min(calc(100% - 28px), var(--shell)); }
   .nav-shell { width: min(calc(100% - 28px), var(--shell)); }
-  .official-brand-logo { width:42px; height:42px; flex-basis:42px; }
+  .official-brand-logo { width:54px; height:54px; flex-basis:54px; }
   .section { padding: 72px 0; }
   .home-hero { gap: 35px; padding-top: 48px; padding-bottom: 50px; }
   .home-hero-copy h1 { font-size: 50px; letter-spacing: -2.8px; }

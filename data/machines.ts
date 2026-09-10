@@ -283,6 +283,139 @@ export const machines: Machine[] = [
         answer: "La ficha oficial indica teléfonos de hasta 8.2 pulgadas y tablets de hasta 12.2 pulgadas, con tamaños de película S, M y L."
       }
     ]
+  },
+  {
+    slug: "smart-vacuum-uv",
+    name: "Smart Vacuum UV",
+    eyebrow: "CURADO UV · VACÍO · ACABADO UNIFORME",
+    tagline: "Curado UV al vacío para completar instalaciones con precisión.",
+    description: "La Smart Vacuum UV es una estación compacta para el proceso final de láminas UV. Su cámara con tapa reúne vacío y curado en un solo equipo para mantener un flujo de trabajo limpio en el punto de venta.",
+    image: "/images/products/uv-curing-white-v1.png",
+    gallery: [],
+    sourceUrl: "",
+    videoLabel: "Guía de uso: Smart Vacuum UV",
+    highlights: [
+      { value: "UV", label: "sistema de curado" },
+      { value: "Vacío", label: "proceso integrado" },
+      { value: "37", label: "unidades reportadas" },
+      { value: "Compacta", label: "estación de mostrador" }
+    ],
+    features: [
+      { title: "Vacío y curado", text: "Integra las etapas finales del proceso de instalación UV dentro de una sola cámara." },
+      { title: "Formato compacto", text: "Su cuerpo cerrado está pensado para incorporarse con facilidad al área de trabajo." },
+      { title: "Presentación profesional", text: "Ayuda a mantener un flujo ordenado al terminar protectores compatibles con tecnología UV." },
+      { title: "Disponibilidad local", text: "Equipo incorporado al catálogo de Rock Space Honduras con existencia reportada." }
+    ],
+    specs: [
+      { label: "Código", value: "RS-PLOTCUV" },
+      { label: "UPC", value: "6941402717360" },
+      { label: "Existencia reportada", value: "37 unidades" },
+      { label: "Precio detalle", value: "L 8,200.00" },
+      { label: "Precio mayorista", value: "L 4,250.00" }
+    ],
+    steps: [
+      { title: "1. Prepare", text: "Confirme que la lámina UV esté instalada y lista para el proceso final." },
+      { title: "2. Coloque", text: "Ubique el dispositivo dentro de la cámara sin forzar la tapa." },
+      { title: "3. Ejecute", text: "Seleccione el ciclo correspondiente siguiendo la guía del material utilizado." },
+      { title: "4. Revise", text: "Retire el dispositivo y compruebe el acabado antes de entregarlo." }
+    ],
+    compatibleFilms: ["Láminas UV compatibles", "Protectores frontales UV"],
+    idealFor: "Tiendas que instalan láminas UV y necesitan completar el proceso en una estación compacta.",
+    faqs: [
+      { question: "¿Para qué sirve esta máquina?", answer: "Está destinada al proceso final de instalación de protectores UV compatibles, combinando vacío y curado dentro de una cámara." },
+      { question: "¿Incluye la lámina?", answer: "La disponibilidad de consumibles se consulta por separado con el equipo de ventas y soporte." }
+    ]
+  },
+  {
+    slug: "heat-transfer-110v",
+    name: "Heat Transfer 110 V",
+    eyebrow: "TRANSFERENCIA · DISEÑOS · 110 V",
+    tagline: "Transferencia de diseños en un equipo compacto y fácil de integrar.",
+    description: "Equipo Rock Space de transferencia térmica para impresión de diseños. Su formato compacto y controles integrados permiten incorporarlo a un área de personalización sin ocupar una estación industrial.",
+    image: "/images/products/heat-transfer-white-v1.png",
+    gallery: [],
+    sourceUrl: "",
+    videoLabel: "Guía de uso: Heat Transfer 110 V",
+    highlights: [
+      { value: "110 V", label: "alimentación indicada" },
+      { value: "Térmica", label: "transferencia de diseños" },
+      { value: "1", label: "unidad reportada" },
+      { value: "Compacta", label: "estación de personalización" }
+    ],
+    features: [
+      { title: "Transferencia de diseños", text: "Pensada para aplicar diseños mediante un proceso controlado de calor y tiempo." },
+      { title: "Controles integrados", text: "La interfaz del equipo reúne los ajustes operativos en el propio cuerpo de la máquina." },
+      { title: "Formato de mostrador", text: "Su diseño compacto permite sumarla a una estación de personalización existente." },
+      { title: "Disponible en Honduras", text: "Modelo incorporado al catálogo con voltaje de 110 V y existencia reportada." }
+    ],
+    specs: [
+      { label: "Código", value: "RS-PLOTDISÑ" },
+      { label: "UPC", value: "6941402771799" },
+      { label: "Voltaje", value: "110 V" },
+      { label: "Existencia reportada", value: "1 unidad" },
+      { label: "Precio detalle", value: "L 24,975.00" },
+      { label: "Precio detalle sin ISV", value: "L 21,717.39" },
+      { label: "Precio mayorista", value: "L 10,350.00" },
+      { label: "Precio mayorista sin ISV", value: "L 9,000.00" }
+    ],
+    steps: [
+      { title: "1. Prepare", text: "Prepare el diseño y el material compatible según el trabajo que realizará." },
+      { title: "2. Configure", text: "Ajuste tiempo y temperatura de acuerdo con las indicaciones del material." },
+      { title: "3. Posicione", text: "Alinee el diseño sobre la superficie antes de cerrar el equipo." },
+      { title: "4. Transfiera", text: "Complete el ciclo y deje enfriar el material antes de revisar el acabado." }
+    ],
+    compatibleFilms: ["Materiales de transferencia compatibles", "Diseños para personalización"],
+    idealFor: "Negocios que desean ampliar su oferta con transferencia de diseños y personalización compacta.",
+    faqs: [
+      { question: "¿Qué voltaje utiliza?", answer: "La ficha suministrada identifica esta versión para 110 V." },
+      { question: "¿Qué materiales acepta?", answer: "La compatibilidad depende del insumo de transferencia; ventas y soporte puede confirmar el material adecuado para cada trabajo." }
+    ]
+  },
+  {
+    slug: "zc3",
+    name: "ZC3 Smart Plotter",
+    eyebrow: "PLOTTER INTELIGENTE · VERSIÓN EN INGLÉS",
+    tagline: "Corte inteligente para ampliar la oferta de protectores bajo demanda.",
+    description: "La ZC3 Smart Plotter es una máquina de corte para preparar protectores y otros trabajos compatibles desde una estación compacta. Esta unidad corresponde a la versión American Standard / English.",
+    image: "/images/products/zc3-white-v1.png",
+    gallery: [],
+    sourceUrl: "",
+    videoLabel: "Guía de uso: ZC3 Smart Plotter",
+    highlights: [
+      { value: "Smart", label: "plotter de corte" },
+      { value: "English", label: "idioma de esta versión" },
+      { value: "1", label: "unidad reportada" },
+      { value: "Compacta", label: "para mostrador" }
+    ],
+    features: [
+      { title: "Corte bajo demanda", text: "Permite preparar trabajos compatibles desde una sola estación de corte." },
+      { title: "Pantalla integrada", text: "La selección y operación principal se realiza desde el panel del propio equipo." },
+      { title: "Formato compacto", text: "Su estructura está pensada para aprovechar mejor el espacio del mostrador." },
+      { title: "Versión identificada", text: "La unidad disponible corresponde a American Standard con interfaz en inglés." }
+    ],
+    specs: [
+      { label: "Modelo", value: "ZC3" },
+      { label: "Código", value: "RS-PLOTZC3" },
+      { label: "UPC", value: "6941402764951" },
+      { label: "Versión", value: "American Standard / English" },
+      { label: "Existencia reportada", value: "1 unidad" },
+      { label: "Precio detalle", value: "L 25,000.00" },
+      { label: "Precio detalle sin ISV", value: "L 21,739.13" },
+      { label: "Precio mayorista", value: "L 12,700.00" },
+      { label: "Precio mayorista sin ISV", value: "L 11,043.48" }
+    ],
+    steps: [
+      { title: "1. Prepare", text: "Encienda el equipo y confirme que la superficie de trabajo esté despejada." },
+      { title: "2. Seleccione", text: "Busque el modelo o plantilla desde la interfaz en inglés." },
+      { title: "3. Cargue", text: "Alinee el material compatible siguiendo las guías de alimentación." },
+      { title: "4. Corte", text: "Confirme el trazado, ejecute el trabajo y revise la pieza antes de instalarla." }
+    ],
+    compatibleFilms: ["Láminas frontales compatibles", "Protectores de corte bajo demanda"],
+    idealFor: "Tiendas que necesitan una estación compacta de corte inteligente con interfaz en inglés.",
+    faqs: [
+      { question: "¿En qué idioma viene esta unidad?", answer: "La ficha suministrada la identifica como versión American Standard / English." },
+      { question: "¿Qué láminas utiliza?", answer: "La compatibilidad exacta depende del formato; ventas y soporte puede confirmar los insumos disponibles para la ZC3." }
+    ]
   }
 ];
 

@@ -47,7 +47,13 @@ export function MachineCarousel({ machines }: { machines: CarouselMachine[] }) {
         <div className="machine-carousel-halo" aria-hidden="true" />
         {machines.map((machine, index) => {
           const position = relativePosition(index, active, count);
-          const positionClass = position === 0 ? "is-active" : Math.abs(position) === 1 ? (position < 0 ? "is-left" : "is-right") : (position < 0 ? "is-far-left" : "is-far-right");
+          const positionClass = position === 0
+            ? "is-active"
+            : Math.abs(position) === 1
+              ? (position < 0 ? "is-left" : "is-right")
+              : Math.abs(position) === 2
+                ? (position < 0 ? "is-far-left" : "is-far-right")
+                : "is-hidden";
           return (
             <article className={`machine-slide-3d ${positionClass}`} aria-hidden={position !== 0} key={machine.name}>
               <div className="machine-slide-visual">

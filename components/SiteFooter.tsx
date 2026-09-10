@@ -7,7 +7,11 @@ import { SITE, whatsappUrlFor } from "@/lib/site";
 
 export function SiteFooter({ salesNumber = SITE.salesWhatsappNumber, supportNumber = SITE.supportWhatsappNumber }: { salesNumber?: string; supportNumber?: string }) {
   const pathname = usePathname();
-  const displayNumber = (value: string) => value.replace(/^504/, "").replace(/(\d{4})(\d{4})/, "$1-$2");
+  const displayNumber = (value: string) => {
+    const digits = value.replace(/\D/g, "");
+    const local = digits.replace(/^504/, "");
+    return `+504 ${local.replace(/(\d{4})(\d{4})/, "$1-$2")}`;
+  };
   if (pathname.startsWith("/admin")) return null;
   return (
     <footer className="site-footer">
@@ -30,7 +34,7 @@ export function SiteFooter({ salesNumber = SITE.salesWhatsappNumber, supportNumb
         <div className="footer-contacts">
           <h3>Contacto</h3>
           <a href={whatsappUrlFor(salesNumber, "Hola, quiero información sobre productos Rock Space.")} target="_blank" rel="noreferrer"><small>Atención al cliente</small><strong>{displayNumber(salesNumber)}</strong></a>
-          <a href={whatsappUrlFor(supportNumber, "Hola, necesito soporte técnico para mi máquina Rock Space.")} target="_blank" rel="noreferrer"><small>Soporte técnico</small><strong>{displayNumber(supportNumber)}</strong></a>
+          <a href={whatsappUrlFor(supportNumber, "Hola, necesito ventas o soporte para mi equipo Rock Space.")} target="_blank" rel="noreferrer"><small>Ventas y soporte</small><strong>{displayNumber(supportNumber)}</strong></a>
           <a href={SITE.instagram} target="_blank" rel="noreferrer">{SITE.instagramHandle}</a>
         </div>
       </div>

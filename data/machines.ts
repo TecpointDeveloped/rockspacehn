@@ -293,7 +293,8 @@ export const machines: Machine[] = [
     image: "/images/products/uv-curing-white-v1.png",
     gallery: [],
     sourceUrl: "",
-    videoLabel: "Guía de uso: Smart Vacuum UV",
+    youtubeId: "RoUU_y7quXE",
+    videoLabel: "Video oficial: aplicación y curado con Smart Vacuum UV",
     highlights: [
       { value: "UV", label: "sistema de curado" },
       { value: "Vacío", label: "proceso integrado" },
@@ -335,7 +336,8 @@ export const machines: Machine[] = [
     image: "/images/products/heat-transfer-white-v1.png",
     gallery: [],
     sourceUrl: "",
-    videoLabel: "Guía de uso: Heat Transfer 110 V",
+    youtubeId: "r9XRM-7MHyw",
+    videoLabel: "Video oficial: Heat Transfer para personalización de fundas",
     highlights: [
       { value: "110 V", label: "alimentación indicada" },
       { value: "Térmica", label: "transferencia de diseños" },
@@ -380,7 +382,8 @@ export const machines: Machine[] = [
     image: "/images/products/zc3-white-v1.png",
     gallery: [],
     sourceUrl: "",
-    videoLabel: "Guía de uso: ZC3 Smart Plotter",
+    youtubeId: "5nUEkaVhWYQ",
+    videoLabel: "Tutorial oficial: cómo utilizar la ZC3 Smart Plotter",
     highlights: [
       { value: "Smart", label: "plotter de corte" },
       { value: "English", label: "idioma de esta versión" },

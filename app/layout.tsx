@@ -40,10 +40,10 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
     <html lang="es">
       <body>
         <a className="skip-link" href="#contenido">Saltar al contenido</a>
-        <SiteHeader salesNumber={support.salesWhatsappNumber} />
+        <SiteHeader salesNumber={support.supportWhatsappNumber} />
         <main id="contenido">{children}</main>
         <SiteFooter salesNumber={support.salesWhatsappNumber} supportNumber={support.supportWhatsappNumber} />
-        <WhatsAppFloat salesNumber={support.salesWhatsappNumber} />
+        <WhatsAppFloat salesNumber={support.supportWhatsappNumber} />
       </body>
     </html>
   );

@@ -26,7 +26,7 @@ export default async function MachinesPage() {
       </section>
 
       <section className="section shell machine-grid">
-        {visibleMachines.map((machine, index) => <MachineCard key={machine.slug} machine={machine} index={index} salesNumber={cms.support.salesWhatsappNumber} />)}
+        {visibleMachines.map((machine, index) => <MachineCard key={machine.slug} machine={machine} index={index} salesNumber={cms.support.supportWhatsappNumber} />)}
       </section>
 
       <section className="section shell">
@@ -52,7 +52,7 @@ export default async function MachinesPage() {
 
       <section className="decision-strip shell">
         <div><span className="eyebrow">¿NO SABE CUÁL ELEGIR?</span><h2>Cuéntenos qué vende y cuánto espacio tiene.</h2></div>
-        <a className="button button-primary" href={whatsappUrlFor(cms.support.salesWhatsappNumber, "Hola, necesito ayuda para elegir una máquina Rock Space.")} target="_blank" rel="noreferrer">Ayudarme a elegir</a>
+        <a className="button button-primary" href={whatsappUrlFor(cms.support.supportWhatsappNumber, "Hola, necesito ayuda para elegir una máquina Rock Space.")} target="_blank" rel="noreferrer">Ayudarme a elegir</a>
       </section>
 
       <SupportCTA />

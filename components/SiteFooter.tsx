@@ -33,7 +33,7 @@ export function SiteFooter({ salesNumber = SITE.salesWhatsappNumber, supportNumb
         </div>
         <div className="footer-contacts">
           <h3>Contacto</h3>
-          <a href={whatsappUrlFor(salesNumber, "Hola, quiero información sobre productos Rock Space.")} target="_blank" rel="noreferrer"><small>Atención al cliente</small><strong>{displayNumber(salesNumber)}</strong></a>
+          <a href={whatsappUrlFor(salesNumber, "Hola, necesito atención al cliente de Rock Space Honduras.")} target="_blank" rel="noreferrer"><small>Atención al cliente</small><strong>{displayNumber(salesNumber)}</strong></a>
           <a href={whatsappUrlFor(supportNumber, "Hola, necesito ventas o soporte para mi equipo Rock Space.")} target="_blank" rel="noreferrer"><small>Ventas y soporte</small><strong>{displayNumber(supportNumber)}</strong></a>
           <a href={SITE.instagram} target="_blank" rel="noreferrer">{SITE.instagramHandle}</a>
         </div>

@@ -13,7 +13,7 @@ export function whatsappUrlFor(number: string, message: string) {
 }
 
 export function salesWhatsappUrl(message: string) {
-  return whatsappUrlFor(SITE.salesWhatsappNumber, message);
+  return whatsappUrlFor(SITE.supportWhatsappNumber, message);
 }
 
 export function supportWhatsappUrl(message: string) {

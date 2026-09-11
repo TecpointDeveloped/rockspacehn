@@ -44,7 +44,7 @@ export default async function StickersPage() {
             <h2>{s.tagline}</h2>
             <p>{s.description}</p>
             <div className="button-row">
-              <a className="button button-white" href={whatsappUrlFor(cms.support.salesWhatsappNumber, "Hola, quiero información y disponibilidad de la RCL1005 para stickers personalizados.")} target="_blank" rel="noreferrer">Consultar RCL1005</a>
+              <a className="button button-white" href={whatsappUrlFor(cms.support.supportWhatsappNumber, "Hola, quiero información y disponibilidad de la RCL1005 para stickers personalizados.")} target="_blank" rel="noreferrer">Consultar RCL1005</a>
               <a className="button button-ghost-light" href="#tutorial">Ver cómo funciona</a>
             </div>
           </div>
@@ -140,7 +140,7 @@ export default async function StickersPage() {
           <h2>{s.consumable.name}</h2>
           <p>{s.consumable.text}</p>
           <div className="consumable-number"><strong>36</strong><span>impresiones por set</span></div>
-          <a className="button button-primary full-button" href={whatsappUrlFor(cms.support.salesWhatsappNumber, "Hola, quiero información sobre consumibles SD21 para la RCL1005.")} target="_blank" rel="noreferrer">Consultar consumibles</a>
+          <a className="button button-primary full-button" href={whatsappUrlFor(cms.support.supportWhatsappNumber, "Hola, quiero información sobre consumibles SD21 para la RCL1005.")} target="_blank" rel="noreferrer">Consultar consumibles</a>
         </aside>
       </section>
 

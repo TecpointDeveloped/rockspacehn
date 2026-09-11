@@ -26,7 +26,7 @@ export default async function FilmsPage() {
 
       <nav className="quick-categories shell film-category-nav" aria-label="Familias de láminas">{groups.map((group, index) => <a href={`#${group.key}`} key={group.key}><b>{String(index + 1).padStart(2, "0")}</b><span>{group.label}</span></a>)}</nav>
 
-      {groups.map((group, index) => <FilmCategorySection key={group.key} id={group.key} title={group.label} description={group.description} products={group.products} dark={index % 3 === 1} salesNumber={cms.support.salesWhatsappNumber} />)}
+      {groups.map((group, index) => <FilmCategorySection key={group.key} id={group.key} title={group.label} description={group.description} products={group.products} dark={index % 3 === 1} salesNumber={cms.support.supportWhatsappNumber} />)}
 
       <section className="section shell">
         <SectionHeading eyebrow="ANTES DE CORTAR" title="Compatibilidad primero.">
@@ -41,7 +41,7 @@ export default async function FilmsPage() {
 
       <section className="decision-strip shell">
         <div><span className="eyebrow">¿QUÉ LÁMINA NECESITA?</span><h2>Díganos el equipo y el acabado que busca.</h2></div>
-        <a className="button button-primary" href={whatsappUrlFor(cms.support.salesWhatsappNumber, "Hola, quiero consultar disponibilidad y compatibilidad de láminas Rock Space.")} target="_blank" rel="noreferrer">Consultar por WhatsApp</a>
+        <a className="button button-primary" href={whatsappUrlFor(cms.support.supportWhatsappNumber, "Hola, quiero consultar disponibilidad y compatibilidad de láminas Rock Space.")} target="_blank" rel="noreferrer">Consultar por WhatsApp</a>
       </section>
 
       <SupportCTA />

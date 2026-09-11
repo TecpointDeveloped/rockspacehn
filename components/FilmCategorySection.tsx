@@ -11,7 +11,7 @@ export function FilmCategorySection({ id, title, description, products, dark = f
         <div className="catalog-product-grid">
           {products.map((product, index) => {
             const variants = availableVariants(product.variants || []);
-            const productImages = product.images?.length ? product.images : [product.image];
+            const productImages = product.images?.includes(product.image) ? product.images : [product.image];
             return <article className="catalog-product" key={product.slug || product.name}>
               <div className={`catalog-product-image ${productImages.length > 1 ? "catalog-product-image-pair" : ""}`}>
                 {productImages.map((image, imageIndex) => <Image key={image} src={image} alt={imageIndex === 0 ? product.alt : `${product.name} ${variants[imageIndex]?.label || "presentación adicional"}`} width={1000} height={1000} quality={88} priority={index === 0 && imageIndex === 0 && id === "flexible"} sizes={productImages.length > 1 ? "(max-width: 700px) 82vw, 22vw" : "(max-width: 700px) 88vw, 40vw"} />)}

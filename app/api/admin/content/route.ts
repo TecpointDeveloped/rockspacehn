@@ -16,6 +16,10 @@ export async function PUT(request: Request) {
   if (!content?.home || !Array.isArray(content.machines) || !Array.isArray(content.films) || !content.support || !content.instagram) {
     return NextResponse.json({ error: "El contenido está incompleto." }, { status: 400 });
   }
+  const filmSlugs = content.films.map((film) => film.slug?.trim()).filter(Boolean);
+  if (filmSlugs.length !== content.films.length || new Set(filmSlugs).size !== filmSlugs.length) {
+    return NextResponse.json({ error: "Cada lámina debe tener un slug único antes de publicar." }, { status: 400 });
+  }
   content.updatedAt = new Date().toISOString();
   await put("cms/site-content.json", JSON.stringify(content), { access: "public", allowOverwrite: true, contentType: "application/json", cacheControlMaxAge: 60 });
   revalidateTag("rockspace-site-content", "max");

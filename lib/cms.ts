@@ -99,9 +99,10 @@ async function loadRemoteContent(): Promise<CmsContent> {
         }),
         ...saved.machines.filter((machine) => !defaultCmsContent.machines.some((baseline) => baseline.slug === machine.slug)),
       ] : defaultCmsContent.machines,
-      films: Array.isArray(saved.films) && saved.films.some((film) => film.slug === "uv-high-definition-ts") ? saved.films.map((film, index) => {
-        const baseline = defaultCmsContent.films.find((item) => item.name === film.name) || defaultCmsContent.films[index];
-        const mergedFilm = { ...baseline, ...film } as Film;
+      films: Array.isArray(saved.films) && saved.films.length > 0 ? saved.films.map((film) => {
+        const baseline = defaultCmsContent.films.find((item) => item.slug === film.slug)
+          || defaultCmsContent.films.find((item) => item.name === film.name);
+        const mergedFilm = { ...(baseline || {}), ...film } as Film;
         return {
           ...mergedFilm,
           slug: mergedFilm.slug || film.name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, ""),

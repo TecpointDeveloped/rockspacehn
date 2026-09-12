@@ -56,6 +56,10 @@ main { overflow: hidden; }
   gap: 24px;
 }
 .brand { display: inline-flex; align-items: center; gap: 14px; flex: 0 0 auto; }
+.brand-lockup { display:grid; width:clamp(178px,19vw,224px); justify-items:center; gap:3px; }
+.brand-wordmark { width:100%; height:auto; object-fit:contain; }
+.brand-lockup small { color:#087e93; font-size:9px; font-weight:900; letter-spacing:.42em; line-height:1; text-indent:.42em; }
+.footer-lockup { padding:11px 16px 10px; border:1px solid rgba(112,223,237,.3); border-radius:13px; background:#fff; box-shadow:0 10px 28px rgba(0,0,0,.13); }
 .official-brand-logo { width:66px; height:66px; flex:0 0 66px; border-radius:50%; clip-path:circle(49.2%); object-fit:cover; box-shadow:0 7px 22px rgba(11,129,149,.18),0 0 0 1px rgba(16,18,20,.07); }
 .footer-logo { width:88px; height:88px; flex-basis:88px; }
 .brand-mark { width: 28px; height: 28px; position: relative; display: inline-block; }
@@ -636,3 +640,28 @@ main { overflow: hidden; }
 
 /* Reversible maintenance screen. The private admin remains available. */
 .maintenance-page{position:fixed;z-index:1000;inset:0;min-height:100svh;display:grid;place-items:center;overflow:auto;padding:28px;background:radial-gradient(circle at 70% 20%,#123944 0,#071418 48%,#03090b 100%);color:#fff;text-align:center}.maintenance-glow{position:absolute;width:min(76vw,760px);aspect-ratio:1;border-radius:50%;background:rgba(31,199,221,.12);filter:blur(80px)}.maintenance-card{position:relative;width:min(100%,760px);padding:clamp(34px,6vw,72px);border:1px solid rgba(255,255,255,.13);border-radius:32px;background:rgba(8,24,29,.72);box-shadow:0 30px 100px rgba(0,0,0,.38);backdrop-filter:blur(18px)}.maintenance-card img{border-radius:50%;box-shadow:0 15px 50px rgba(12,184,207,.22)}.maintenance-card>span{display:block;margin-top:25px;color:#72ddea;font-size:11px;font-weight:900;letter-spacing:.18em}.maintenance-card h1{margin:14px auto 20px;max-width:650px;font-size:clamp(48px,7.5vw,88px);line-height:.92;letter-spacing:-.055em}.maintenance-card p{max-width:600px;margin:0 auto;color:#b4c2c7;font-size:clamp(15px,2vw,18px);line-height:1.7}.maintenance-status{display:inline-flex;align-items:center;gap:10px;margin-top:30px;padding:11px 16px;border:1px solid rgba(255,255,255,.12);border-radius:999px;color:#d4e0e3;font-size:11px;font-weight:800}.maintenance-status i{width:8px;height:8px;border-radius:50%;background:#72ddea;box-shadow:0 0 18px #72ddea}@media(max-height:760px) and (min-width:541px){.maintenance-card{padding:30px 46px}.maintenance-card img{width:86px;height:86px}.maintenance-card>span{margin-top:16px}.maintenance-card h1{margin:10px auto 14px;font-size:58px}.maintenance-card p{font-size:14px}.maintenance-status{margin-top:18px}}@media(max-width:540px){.maintenance-page{padding:16px}.maintenance-card{padding:36px 22px;border-radius:24px}.maintenance-card img{width:94px;height:94px}.maintenance-card h1{font-size:48px;letter-spacing:-2.6px}}
+body::after {
+  content: "";
+  position: fixed;
+  z-index: 9999;
+  inset: 8px;
+  border: 1px solid rgba(92, 226, 242, 0.95);
+  border-radius: 14px;
+  box-shadow:
+    inset 0 0 8px rgba(92, 226, 242, 0.22),
+    0 0 12px rgba(92, 226, 242, 0.28);
+  pointer-events: none;
+}
+
+@media (max-width: 640px) {
+  body::after {
+    inset: 4px;
+    border-radius: 9px;
+  }
+}
+
+@media print {
+  body::after {
+    display: none;
+  }
+}

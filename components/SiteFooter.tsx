@@ -18,8 +18,10 @@ export function SiteFooter({ salesNumber = SITE.salesWhatsappNumber, supportNumb
       <div className="footer-grid shell">
         <div className="footer-brand">
           <div className="brand brand-footer">
-            <Image className="official-brand-logo footer-logo" src="/brand/rock-space-honduras.png" alt="" width={82} height={82} />
-            <span className="brand-copy"><strong>rock space</strong><small>HONDURAS</small></span>
+            <span className="brand-lockup footer-lockup">
+              <Image className="brand-wordmark" src="/brand/rock-space-wordmark.webp" alt="rock space" width={800} height={125} />
+              <small>HONDURAS</small>
+            </span>
           </div>
           <p>Stickers personalizados, máquinas inteligentes de corte, láminas, tutoriales y soporte para Honduras.</p>
         </div>

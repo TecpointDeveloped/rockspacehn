@@ -8,7 +8,7 @@ import { getCmsContent } from "@/lib/cms";
 
 export const metadata: Metadata = {
   title: "Láminas",
-  description: "Láminas frontales Rock Space disponibles en Honduras, con acabados, beneficios y especificaciones."
+  description: "Láminas frontales y traseras Rock Space disponibles en Honduras, con acabados, beneficios y especificaciones."
 };
 
 export const revalidate = 60;
@@ -20,8 +20,8 @@ export default async function FilmsPage() {
     <>
       <section className="page-hero shell narrow-hero">
         <span className="eyebrow">LÁMINAS ROCK SPACE</span>
-        <h1>Láminas frontales para cada necesidad.</h1>
-        <p>Conozca los tipos disponibles en Honduras y compare sus acabados, funciones y especificaciones.</p>
+        <h1>Láminas para cada necesidad.</h1>
+        <p>Conozca las opciones frontales y traseras disponibles en Honduras y compare sus acabados, funciones y especificaciones.</p>
       </section>
 
       <nav className="quick-categories shell film-category-nav" aria-label="Familias de láminas">{groups.map((group, index) => <a href={`#${group.key}`} key={group.key}><b>{String(index + 1).padStart(2, "0")}</b><span>{group.label}</span></a>)}</nav>

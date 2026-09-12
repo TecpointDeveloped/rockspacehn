@@ -99,19 +99,22 @@ async function loadRemoteContent(): Promise<CmsContent> {
         }),
         ...saved.machines.filter((machine) => !defaultCmsContent.machines.some((baseline) => baseline.slug === machine.slug)),
       ] : defaultCmsContent.machines,
-      films: Array.isArray(saved.films) && saved.films.length > 0 ? saved.films.map((film) => {
-        const baseline = defaultCmsContent.films.find((item) => item.slug === film.slug)
-          || defaultCmsContent.films.find((item) => item.name === film.name);
-        const mergedFilm = { ...(baseline || {}), ...film } as Film;
-        return {
-          ...mergedFilm,
-          slug: mergedFilm.slug || film.name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, ""),
-          categoryKey: mergedFilm.categoryKey || "flexible",
-          stock: Number(mergedFilm.stock) || 0,
-          variants: Array.isArray(mergedFilm.variants) ? mergedFilm.variants : [],
-          compatibility: Array.isArray(mergedFilm.compatibility) ? mergedFilm.compatibility : [],
-        } as Film;
-      }) : defaultCmsContent.films,
+      films: Array.isArray(saved.films) && saved.films.length > 0 ? [
+        ...saved.films.map((film) => {
+          const baseline = defaultCmsContent.films.find((item) => item.slug === film.slug)
+            || defaultCmsContent.films.find((item) => item.name === film.name);
+          const mergedFilm = { ...(baseline || {}), ...film } as Film;
+          return {
+            ...mergedFilm,
+            slug: mergedFilm.slug || film.name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, ""),
+            categoryKey: mergedFilm.categoryKey || "flexible",
+            stock: Number(mergedFilm.stock) || 0,
+            variants: Array.isArray(mergedFilm.variants) ? mergedFilm.variants : [],
+            compatibility: Array.isArray(mergedFilm.compatibility) ? mergedFilm.compatibility : [],
+          } as Film;
+        }),
+        ...defaultCmsContent.films.filter((baseline) => !saved.films.some((film) => film.slug === baseline.slug || film.name === baseline.name)),
+      ] : defaultCmsContent.films,
     };
     return merged;
   } catch {

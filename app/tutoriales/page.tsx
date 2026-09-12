@@ -37,7 +37,7 @@ export default async function TutorialsPage() {
       <section className="tutorial-upload-note shell">
         <span className="eyebrow">TODO EN ROCKSPACEHN</span>
         <h2>La guía vive junto al producto.</h2>
-        <p>Cada equipo concentra video, pasos, especificaciones y soporte. Cuando grabemos tutoriales propios en español, se sustituyen los videos embebidos sin cambiar la estructura del sitio.</p>
+        <p>Cada equipo concentra su video oficial, pasos, especificaciones y soporte. La guía escrita en español acompaña cada demostración para que la información principal siempre esté disponible.</p>
       </section>
 
       <section className="support-cta shell">

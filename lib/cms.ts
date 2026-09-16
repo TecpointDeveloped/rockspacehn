@@ -60,6 +60,16 @@ export const defaultCmsContent: CmsContent = {
   },
 };
 
+const legacyFilmSlugs = new Set([
+  "flexible-matte-txl", "flexible-high-definition-tl", "uv-high-definition-ts", "uv-matte-ts",
+  "flexible-gaming-matte", "flexible-matte-privacy-ts", "uv-privacy-ts",
+  "flexible-super-self-healing-ts", "flexible-matte-super-self-healing-ts", "premium-film",
+  "laptop-privacy", "uv-hd-anti-reflective", "uv-armor-9h-hd", "uv-hd-premium",
+  "rear-blingbling", "rear-carbon", "rear-dark", "rear-foil", "rear-geometric",
+  "rear-printed-leather", "rear-relief-translucent", "rear-vivid",
+]);
+const legacyFilmNames = new Set(["Lámina Super Self Healing", "Lámina Matte Gaming"]);
+
 async function loadRemoteContent(): Promise<CmsContent> {
   if (!process.env.BLOB_READ_WRITE_TOKEN) return defaultCmsContent;
   try {
@@ -105,22 +115,30 @@ async function loadRemoteContent(): Promise<CmsContent> {
         ...saved.machines.filter((machine) => !defaultCmsContent.machines.some((baseline) => baseline.slug === machine.slug)),
       ] : defaultCmsContent.machines,
       films: savedFilms.length > 0 ? [
-        ...savedFilms.map((film) => {
-          const baseline = defaultCmsContent.films.find((item) => item.slug === film.slug)
-            || defaultCmsContent.films.find((item) => item.name === film.name);
-          const mergedFilm = { ...(baseline || {}), ...film } as Film;
-          const imageIsShared = Boolean(mergedFilm.image && (savedImageUsage.get(mergedFilm.image) || 0) > 1);
+        ...defaultCmsContent.films.map((baseline) => {
+          const savedFilm = savedFilms.find((film) => film.sku === baseline.sku || film.slug === baseline.slug);
+          if (!savedFilm) return baseline;
+          const isCurrentRecord = savedFilm.slug === baseline.slug;
+          const mergedFilm = (isCurrentRecord ? { ...baseline, ...savedFilm } : baseline) as Film;
+          const uploadedImage = /^https?:\/\//.test(savedFilm.image || "") ? savedFilm.image : baseline.image;
+          const imageIsShared = Boolean(uploadedImage && (savedImageUsage.get(uploadedImage) || 0) > 1);
           return {
             ...mergedFilm,
-            slug: mergedFilm.slug || film.name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, ""),
-            image: imageIsShared && baseline?.image ? baseline.image : (mergedFilm.image || baseline?.image || ""),
-            categoryKey: mergedFilm.categoryKey || "flexible",
-            stock: Number(mergedFilm.stock) || 0,
-            variants: Array.isArray(mergedFilm.variants) ? mergedFilm.variants : [],
-            compatibility: Array.isArray(mergedFilm.compatibility) ? mergedFilm.compatibility : [],
+            slug: baseline.slug,
+            sku: baseline.sku,
+            image: imageIsShared ? baseline.image : uploadedImage,
+            images: uploadedImage && !imageIsShared ? [uploadedImage] : [],
+            categoryKey: mergedFilm.categoryKey || baseline.categoryKey,
+            stock: Math.max(0, Number(mergedFilm.stock) || 0),
+            variants: Array.isArray(mergedFilm.variants) ? mergedFilm.variants : baseline.variants,
+            compatibility: Array.isArray(mergedFilm.compatibility) ? mergedFilm.compatibility : baseline.compatibility,
           } as Film;
         }),
-        ...defaultCmsContent.films.filter((baseline) => !savedFilms.some((film) => film.slug === baseline.slug || film.name === baseline.name)),
+        ...savedFilms.filter((film) => {
+          const matchesCatalog = defaultCmsContent.films.some((baseline) => baseline.sku === film.sku || baseline.slug === film.slug);
+          const containsCatalogSku = film.variants?.some((variant) => variant.sku && defaultCmsContent.films.some((baseline) => baseline.sku === variant.sku));
+          return !matchesCatalog && !containsCatalogSku && !legacyFilmSlugs.has(film.slug) && !legacyFilmNames.has(film.name);
+        }),
       ] : defaultCmsContent.films,
     };
     return merged;

@@ -41,3 +41,7 @@ html{scroll-behavior:smooth}.home-machine-banner{padding:86px 0 70px;color:#fff;
 @media(prefers-reduced-motion:reduce){.machine-slide-3d,.tutorial-hub-picker button{transition:none}}
 
 .machine-slide-3d.is-hidden{z-index:0;opacity:0;visibility:hidden;pointer-events:none;transform:translate3d(-50%,40px,-420px) scale(.64)}
+
+/* Empty film records stay useful and polished until their unique image is uploaded in the CRUD. */
+.catalog-image-placeholder{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;width:calc(100% - 56px);min-height:360px;margin:28px;border:1px dashed rgba(33,189,211,.55);border-radius:24px;background:linear-gradient(145deg,#f8fdfe,#eaf8fa);color:#527078;text-align:center}.catalog-image-placeholder span{color:var(--accent-dark);font-size:10px;font-weight:900;letter-spacing:.14em}.catalog-image-placeholder strong{font-size:22px;letter-spacing:-.025em}.catalog-image-placeholder small{color:#7b9096;font-size:11px}.catalog-product-sku{display:inline-flex;margin:0 0 16px;padding:7px 10px;border:1px solid #cfe8ec;border-radius:999px;background:#eff9fa;color:#087f94;font-size:10px;letter-spacing:.055em}
+@media(max-width:700px){.catalog-image-placeholder{min-height:285px;margin:20px}}

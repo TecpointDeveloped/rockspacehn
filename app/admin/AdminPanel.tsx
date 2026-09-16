@@ -441,10 +441,10 @@ export function AdminPanel({
             <div>
               <div className={styles.sectionHead}>
                 <div>
-                  <h2>Láminas frontales</h2>
+                  <h2>Productos del catálogo</h2>
                   <p>
-                    {content.films.length} tipos registrados; el stock controla
-                    la visibilidad
+                    {content.films.length} SKUs registrados; cada lámina conserva
+                    su propia imagen
                   </p>
                 </div>
                 <button onClick={addFilm}>+ Crear lámina</button>
@@ -459,10 +459,11 @@ export function AdminPanel({
                       <small>
                         {film.stock > 0 ||
                         film.variants?.some((variant) => variant.stock > 0)
-                          ? "VISIBLE"
-                          : "OCULTA SIN EXISTENCIA"}
+                          ? "CON EXISTENCIA"
+                          : "SIN EXISTENCIA"}
                       </small>
                       <strong>{film.name}</strong>
+                      {film.sku && <small>SKU {film.sku}</small>}
                     </div>
                     <span>Editar ↓</span>
                   </summary>
@@ -476,6 +477,11 @@ export function AdminPanel({
                       label="Slug"
                       value={film.slug || ""}
                       onChange={(value) => updateFilm(index, { slug: value })}
+                    />
+                    <Field
+                      label="SKU"
+                      value={film.sku || ""}
+                      onChange={(value) => updateFilm(index, { sku: value.trim().toUpperCase() })}
                     />
                     <Field
                       label="Categoría interna"

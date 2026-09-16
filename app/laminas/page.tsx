@@ -7,8 +7,8 @@ import { whatsappUrlFor } from "@/lib/site";
 import { getCmsContent } from "@/lib/cms";
 
 export const metadata: Metadata = {
-  title: "Láminas",
-  description: "Láminas frontales y traseras Rock Space disponibles en Honduras, con acabados, beneficios y especificaciones."
+  title: "Láminas, repuestos y accesorios",
+  description: "Catálogo Rock Space Honduras de láminas, repuestos y accesorios identificados por SKU."
 };
 
 export const revalidate = 60;
@@ -19,12 +19,12 @@ export default async function FilmsPage() {
   return (
     <>
       <section className="page-hero shell narrow-hero">
-        <span className="eyebrow">LÁMINAS ROCK SPACE</span>
-        <h1>Láminas para cada necesidad.</h1>
-        <p>Conozca las opciones frontales y traseras disponibles en Honduras y compare sus acabados, funciones y especificaciones.</p>
+        <span className="eyebrow">CATÁLOGO ROCK SPACE</span>
+        <h1>Láminas, repuestos y accesorios.</h1>
+        <p>Explore cada producto identificado por su SKU y consulte disponibilidad, formato y compatibilidad en Honduras.</p>
       </section>
 
-      <nav className="quick-categories shell film-category-nav" aria-label="Familias de láminas">{groups.map((group, index) => <a href={`#${group.key}`} key={group.key}><b>{String(index + 1).padStart(2, "0")}</b><span>{group.label}</span></a>)}</nav>
+      <nav className="quick-categories shell film-category-nav" aria-label="Categorías del catálogo">{groups.map((group, index) => <a href={`#${group.key}`} key={group.key}><b>{String(index + 1).padStart(2, "0")}</b><span>{group.label}</span></a>)}</nav>
 
       {groups.map((group, index) => <FilmCategorySection key={group.key} id={group.key} title={group.label} description={group.description} products={group.products} dark={index % 3 === 1} salesNumber={cms.support.supportWhatsappNumber} />)}
 

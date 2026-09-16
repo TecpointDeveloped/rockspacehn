@@ -313,7 +313,7 @@ export const films: Film[] = [
     compatibility: ["Parte trasera de teléfonos"],
     specs: [{ label: "Formato", value: "T/S" }, { label: "Presentación", value: "5 piezas" }, { label: "Diseños", value: "1, 4 y 5" }],
     tone: "rear",
-    image: "/images/films/rear-blingbling.png",
+    image: "/images/films/rear-blingbling-v2.webp",
     alt: "Lámina trasera BlingBling Rock Space"
   },
   {
@@ -332,7 +332,7 @@ export const films: Film[] = [
     compatibility: ["Parte trasera de teléfonos"],
     specs: [{ label: "Formato", value: "T/S" }, { label: "Presentación", value: "5 piezas" }, { label: "Acabado", value: "Fibra de carbono" }],
     tone: "rear",
-    image: "/images/films/rear-carbon.png",
+    image: "/images/films/rear-carbon-v2.webp",
     alt: "Lámina trasera Carbon Rock Space"
   },
   {
@@ -355,7 +355,7 @@ export const films: Film[] = [
     compatibility: ["Parte trasera de teléfonos"],
     specs: [{ label: "Formato", value: "T/S" }, { label: "Presentación", value: "5 piezas" }, { label: "Diseños", value: "Dark 1 al 7" }],
     tone: "rear",
-    image: "/images/films/rear-dark.png",
+    image: "/images/films/rear-dark-v2.webp",
     alt: "Lámina trasera Dark Rock Space"
   },
   {
@@ -373,7 +373,7 @@ export const films: Film[] = [
     compatibility: ["Parte trasera de teléfonos"],
     specs: [{ label: "Formato", value: "T/S" }, { label: "Presentación", value: "5 piezas" }, { label: "Diseños", value: "Foil 1 al 4" }],
     tone: "rear",
-    image: "/images/films/rear-foil.png",
+    image: "/images/films/rear-foil-v2.webp",
     alt: "Lámina trasera Foil Rock Space"
   },
   {
@@ -392,7 +392,7 @@ export const films: Film[] = [
     compatibility: ["Parte trasera de teléfonos"],
     specs: [{ label: "Formato", value: "T/S" }, { label: "Presentación", value: "5 piezas" }, { label: "Acabado", value: "Translúcido" }],
     tone: "rear",
-    image: "/images/films/rear-geometric.png",
+    image: "/images/films/rear-geometric-v2.webp",
     alt: "Lámina trasera geométrica translúcida Rock Space"
   },
   {
@@ -410,7 +410,7 @@ export const films: Film[] = [
     compatibility: ["Parte trasera de teléfonos"],
     specs: [{ label: "Formato", value: "T/M" }, { label: "Presentación", value: "5 piezas" }, { label: "Diseños", value: "1 y 3" }],
     tone: "rear",
-    image: "/images/films/rear-printed-leather.png",
+    image: "/images/films/rear-printed-leather-v2.webp",
     alt: "Lámina trasera Printed Leather Rock Space"
   },
   {
@@ -432,7 +432,7 @@ export const films: Film[] = [
     compatibility: ["Tablets", "Equipos de formato grande"],
     specs: [{ label: "Formatos", value: "T/L y T/XL" }, { label: "Presentación", value: "3 piezas" }, { label: "Acabado", value: "Relieve translúcido" }],
     tone: "rear",
-    image: "/images/films/rear-relief-translucent.png",
+    image: "/images/films/rear-relief-translucent-v2.webp",
     alt: "Lámina trasera con relieve translúcido Rock Space"
   },
   {
@@ -450,7 +450,7 @@ export const films: Film[] = [
     compatibility: ["Parte trasera de teléfonos"],
     specs: [{ label: "Formato", value: "T/S" }, { label: "Presentación", value: "5 piezas" }, { label: "Diseños", value: "Vivid 1 al 4" }],
     tone: "rear",
-    image: "/images/films/rear-vivid.png",
+    image: "/images/films/rear-vivid-v2.webp",
     alt: "Lámina trasera Vivid Rock Space"
   }
 ];

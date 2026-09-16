@@ -69,6 +69,11 @@ async function loadRemoteContent(): Promise<CmsContent> {
     const response = await fetch(blob.url, { cache: "no-store" });
     if (!response.ok) return defaultCmsContent;
     const saved = (await response.json()) as CmsContent;
+    const savedFilms = Array.isArray(saved.films) ? saved.films : [];
+    const savedImageUsage = savedFilms.reduce((usage, film) => {
+      if (film.image) usage.set(film.image, (usage.get(film.image) || 0) + 1);
+      return usage;
+    }, new Map<string, number>());
     const savedHomeIsStickerFirst = saved.home?.title === "Una foto. Un sticker." || saved.home?.accent === "En minutos.";
     const merged: CmsContent = {
       ...defaultCmsContent,
@@ -99,21 +104,23 @@ async function loadRemoteContent(): Promise<CmsContent> {
         }),
         ...saved.machines.filter((machine) => !defaultCmsContent.machines.some((baseline) => baseline.slug === machine.slug)),
       ] : defaultCmsContent.machines,
-      films: Array.isArray(saved.films) && saved.films.length > 0 ? [
-        ...saved.films.map((film) => {
+      films: savedFilms.length > 0 ? [
+        ...savedFilms.map((film) => {
           const baseline = defaultCmsContent.films.find((item) => item.slug === film.slug)
             || defaultCmsContent.films.find((item) => item.name === film.name);
           const mergedFilm = { ...(baseline || {}), ...film } as Film;
+          const imageIsShared = Boolean(mergedFilm.image && (savedImageUsage.get(mergedFilm.image) || 0) > 1);
           return {
             ...mergedFilm,
             slug: mergedFilm.slug || film.name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, ""),
+            image: imageIsShared && baseline?.image ? baseline.image : (mergedFilm.image || baseline?.image || ""),
             categoryKey: mergedFilm.categoryKey || "flexible",
             stock: Number(mergedFilm.stock) || 0,
             variants: Array.isArray(mergedFilm.variants) ? mergedFilm.variants : [],
             compatibility: Array.isArray(mergedFilm.compatibility) ? mergedFilm.compatibility : [],
           } as Film;
         }),
-        ...defaultCmsContent.films.filter((baseline) => !saved.films.some((film) => film.slug === baseline.slug || film.name === baseline.name)),
+        ...defaultCmsContent.films.filter((baseline) => !savedFilms.some((film) => film.slug === baseline.slug || film.name === baseline.name)),
       ] : defaultCmsContent.films,
     };
     return merged;

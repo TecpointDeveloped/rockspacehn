@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import type { CmsContent, CmsInstagramPost, CmsMachine } from "@/lib/cms";
 import type { Film } from "@/data/films";
@@ -44,6 +44,30 @@ export function AdminPanel({
   const [tab, setTab] = useState<Tab>("home");
   const [busy, setBusy] = useState(false);
   const [notice, setNotice] = useState("");
+  const [filmSearch, setFilmSearch] = useState("");
+
+  const filteredFilms = useMemo(() => {
+    const query = filmSearch.trim().toLocaleLowerCase("es");
+
+    return content.films
+      .map((film, index) => ({ film, index }))
+      .filter(({ film }) => {
+        if (!query) return true;
+
+        return [
+          film.name,
+          film.sku,
+          film.category,
+          film.categoryKey,
+          film.subcategory,
+          film.slug,
+        ]
+          .filter(Boolean)
+          .some((value) =>
+            String(value).toLocaleLowerCase("es").includes(query),
+          );
+      });
+  }, [content.films, filmSearch]);
 
   async function save() {
     setBusy(true);
@@ -449,7 +473,44 @@ export function AdminPanel({
                 </div>
                 <button onClick={addFilm}>+ Crear lámina</button>
               </div>
-              {content.films.map((film, index) => (
+              <div className={styles.catalogSearch}>
+                <label htmlFor="catalog-search">Buscar producto</label>
+                <div>
+                  <span aria-hidden="true">⌕</span>
+                  <input
+                    id="catalog-search"
+                    type="search"
+                    value={filmSearch}
+                    onChange={(event) => setFilmSearch(event.target.value)}
+                    placeholder="Nombre, SKU o categoría…"
+                    autoComplete="off"
+                  />
+                  {filmSearch && (
+                    <button
+                      type="button"
+                      onClick={() => setFilmSearch("")}
+                      aria-label="Limpiar búsqueda"
+                    >
+                      Limpiar
+                    </button>
+                  )}
+                </div>
+                <small>
+                  {filmSearch.trim()
+                    ? `${filteredFilms.length} de ${content.films.length} productos encontrados`
+                    : `${content.films.length} productos disponibles`}
+                </small>
+              </div>
+              {filteredFilms.length === 0 && (
+                <div className={styles.emptySearch}>
+                  <strong>No encontramos ese producto</strong>
+                  <span>Pruebe con otro nombre, SKU o categoría.</span>
+                  <button type="button" onClick={() => setFilmSearch("")}>
+                    Ver todo el catálogo
+                  </button>
+                </div>
+              )}
+              {filteredFilms.map(({ film, index }) => (
                 <details
                   className={styles.record}
                   key={`${film.name}-${index}`}

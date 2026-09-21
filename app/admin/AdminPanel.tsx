@@ -645,14 +645,25 @@ export function AdminPanel({
                     />
                     <button
                       className={styles.danger}
-                      onClick={() =>
-                        setContent({
-                          ...content,
-                          films: content.films.filter((_, i) => i !== index),
-                        })
-                      }
+                      onClick={() => {
+                        const deletedIds = [
+                          film.sku ? `sku:${film.sku}` : "",
+                          film.slug ? `slug:${film.slug}` : "",
+                        ].filter(Boolean);
+
+                        setContent((current) => ({
+                          ...current,
+                          films: current.films.filter((_, i) => i !== index),
+                          deletedFilmIds: [
+                            ...new Set([
+                              ...(current.deletedFilmIds || []),
+                              ...deletedIds,
+                            ]),
+                          ],
+                        }));
+                      }}
                     >
-                      Eliminar lámina
+                      Eliminar producto
                     </button>
                   </div>
                 </details>

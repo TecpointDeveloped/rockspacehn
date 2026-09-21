@@ -22,6 +22,7 @@ export type CmsContent = {
   sticker: CmsSticker;
   machines: CmsMachine[];
   films: Film[];
+  deletedFilmIds?: string[];
   support: { salesWhatsappNumber: string; supportWhatsappNumber: string; instagram: string; instagramHandle: string };
   instagram: CmsInstagram;
   updatedAt?: string;
@@ -45,6 +46,7 @@ export const defaultCmsContent: CmsContent = {
     spanishSummary: machine.steps.map((step) => `${step.title}: ${step.text}`).join(" "),
   })),
   films,
+  deletedFilmIds: [],
   support: { salesWhatsappNumber: SITE.salesWhatsappNumber, supportWhatsappNumber: SITE.supportWhatsappNumber, instagram: SITE.instagram, instagramHandle: SITE.instagramHandle },
   instagram: {
     enabled: true,
@@ -80,6 +82,26 @@ async function loadRemoteContent(): Promise<CmsContent> {
     if (!response.ok) return defaultCmsContent;
     const saved = (await response.json()) as CmsContent;
     const savedFilms = Array.isArray(saved.films) ? saved.films : [];
+    const deletedFilmIds = new Set(
+      Array.isArray(saved.deletedFilmIds)
+        ? saved.deletedFilmIds
+        : defaultCmsContent.films
+            .filter(
+              (baseline) =>
+                !savedFilms.some(
+                  (film) =>
+                    film.sku === baseline.sku || film.slug === baseline.slug,
+                ),
+            )
+            .flatMap((film) => [
+              film.sku ? `sku:${film.sku}` : "",
+              film.slug ? `slug:${film.slug}` : "",
+            ])
+            .filter(Boolean),
+    );
+    const filmWasDeleted = (film: Film) =>
+      deletedFilmIds.has(`sku:${film.sku}`) ||
+      deletedFilmIds.has(`slug:${film.slug}`);
     const savedImageUsage = savedFilms.reduce((usage, film) => {
       if (film.image) usage.set(film.image, (usage.get(film.image) || 0) + 1);
       return usage;
@@ -88,6 +110,7 @@ async function loadRemoteContent(): Promise<CmsContent> {
     const merged: CmsContent = {
       ...defaultCmsContent,
       ...saved,
+      deletedFilmIds: [...deletedFilmIds],
       home: savedHomeIsStickerFirst ? defaultCmsContent.home : { ...defaultCmsContent.home, ...saved.home },
       support: {
         ...defaultCmsContent.support,
@@ -114,8 +137,8 @@ async function loadRemoteContent(): Promise<CmsContent> {
         }),
         ...saved.machines.filter((machine) => !defaultCmsContent.machines.some((baseline) => baseline.slug === machine.slug)),
       ] : defaultCmsContent.machines,
-      films: savedFilms.length > 0 ? [
-        ...defaultCmsContent.films.map((baseline) => {
+      films: [
+        ...defaultCmsContent.films.filter((baseline) => !filmWasDeleted(baseline)).map((baseline) => {
           const savedFilm = savedFilms.find((film) => film.sku === baseline.sku || film.slug === baseline.slug);
           if (!savedFilm) return baseline;
           const isCurrentRecord = savedFilm.slug === baseline.slug;
@@ -135,11 +158,12 @@ async function loadRemoteContent(): Promise<CmsContent> {
           } as Film;
         }),
         ...savedFilms.filter((film) => {
+          if (filmWasDeleted(film)) return false;
           const matchesCatalog = defaultCmsContent.films.some((baseline) => baseline.sku === film.sku || baseline.slug === film.slug);
           const containsCatalogSku = film.variants?.some((variant) => variant.sku && defaultCmsContent.films.some((baseline) => baseline.sku === variant.sku));
           return !matchesCatalog && !containsCatalogSku && !legacyFilmSlugs.has(film.slug) && !legacyFilmNames.has(film.name);
         }),
-      ] : defaultCmsContent.films,
+      ],
     };
     return merged;
   } catch {

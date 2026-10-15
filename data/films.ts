@@ -31,7 +31,6 @@ type ExtraSeed = [sku: string, name: string, stock: number, categoryKey: "spares
 const seeds: Seed[] = [
   ["RS-FAHE20S", "Super Self Healing T/S", 560, "T/S", 20, "flexible", "Super Self Healing"],
   ["RS-FAME20S", "Matte Super Self Healing T/S", 160, "T/S", 20, "matte", "Matte Super Self Healing"],
-  ["RS-FD70969", "Lámina para diseño de cobertores", 10, "Universal", 5, "design", "Diseño de cobertores"],
   ["RS-FHDP10L", "Premium T/L", 160, "T/L", 10, "premium", "Premium"],
   ["RS-FHDP3XL", "Premium T/XL", 143, "T/XL", 3, "premium", "Premium"],
   ["RS-FHDP50S", "Premium T/S", 750, "T/S", 50, "premium", "Premium"],
@@ -126,6 +125,21 @@ const categoryNames: Record<Film["categoryKey"], string> = {
   accessories: "Accesorios",
 };
 
+// Copies recovered from the site's image cache while Vercel Blob was unavailable.
+// A product-specific image uploaded later in the CMS takes precedence over these.
+const recoveredFilmImages: Record<string, string> = {
+  "RS-FAHE20S": "/images/catalog-restored/rs-fahe20s.png",
+  "RS-FAME20S": "/images/catalog-restored/rs-fame20s.png",
+  "RS-FHDP10L": "/images/catalog-restored/rs-fhdp10l.png",
+  "RS-FHDP3XL": "/images/catalog-restored/rs-fhdp3xl.png",
+  "RS-FUVAN10S": "/images/catalog-restored/rs-fuvan10s.png",
+  "RS-FUVAR10S": "/images/catalog-restored/rs-fuvar10s.png",
+  "RS-FUVHD20S": "/images/catalog-restored/rs-fuvhd20s.png",
+  "RS-FUVHDP20S": "/images/catalog-restored/rs-fuvhdp20s.png",
+  "RS-FUVMT20S": "/images/catalog-restored/rs-fuvmt20s.png",
+  "RS-FUVPV10S": "/images/catalog-restored/rs-fuvpv10s.png",
+};
+
 function compatibilityFor(categoryKey: Film["categoryKey"], format: string) {
   if (categoryKey === "rear") return format === "T/L" ? ["Tablets"] : format === "T/XL" ? ["Pantallas grandes"] : ["Parte trasera de teléfonos"];
   if (categoryKey === "macbook") return [`Laptops de ${format}`];
@@ -138,6 +152,7 @@ function compatibilityFor(categoryKey: Film["categoryKey"], format: string) {
 function makeFilm([sku, name, stock, format, pieces, categoryKey, subcategory]: Seed): Film {
   const units = `${pieces} ${pieces === 1 ? "pieza" : "piezas"}`;
   const presentation = `${format} · ${units}`;
+  const image = recoveredFilmImages[sku] || "";
   return {
     slug: sku.toLowerCase(),
     sku,
@@ -154,9 +169,9 @@ function makeFilm([sku, name, stock, format, pieces, categoryKey, subcategory]: 
     compatibility: compatibilityFor(categoryKey, format),
     specs: [{ label: "SKU", value: sku }, { label: "Formato", value: format }, { label: "Presentación", value: units }],
     tone: categoryKey,
-    image: "",
+    image,
     images: [],
-    alt: `${name} Rock Space - imagen pendiente`,
+    alt: `${name} Rock Space${image ? "" : " - imagen pendiente"}`,
   };
 }
 

@@ -37,14 +37,21 @@ export async function POST(request: Request) {
   const baseName = kind === "film" ? filmBase : safeSlug;
   const uniqueVersion = `${Date.now()}-${crypto.randomUUID().slice(0, 8)}`;
   const filename = `${baseName}-${uniqueVersion}.${extensions[file.type]}`;
-  const blob = await put(`media/${kind === "film" ? "laminas" : "general"}/${filename}`, file, {
-    access: "public",
-    addRandomSuffix: false,
-    contentType: file.type,
-  });
+  try {
+    const blob = await put(`media/${kind === "film" ? "laminas" : "general"}/${filename}`, file, {
+      access: "public",
+      addRandomSuffix: false,
+      contentType: file.type,
+    });
 
-  return NextResponse.json(
-    { url: blob.url, filename },
-    { headers: { "Cache-Control": "private, no-store, max-age=0" } },
-  );
+    return NextResponse.json(
+      { url: blob.url, filename },
+      { headers: { "Cache-Control": "private, no-store, max-age=0" } },
+    );
+  } catch {
+    return NextResponse.json(
+      { error: "El almacenamiento de Vercel no está disponible. La imagen no se subió; inténtelo cuando se restablezca." },
+      { status: 503 },
+    );
+  }
 }

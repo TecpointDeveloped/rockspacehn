@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import type { CmsContent, CmsInstagramPost, CmsMachine } from "@/lib/cms";
 import type { Film } from "@/data/films";
@@ -27,7 +27,7 @@ const tabs: { id: Tab; label: string; description: string }[] = [
     label: "Tutoriales",
     description: "Videos y guía en español",
   },
-  { id: "films", label: "Láminas", description: "Tipos y beneficios" },
+  { id: "films", label: "Productos", description: "Láminas, repuestos y accesorios" },
   { id: "instagram", label: "Instagram", description: "Perfil y destacados" },
   { id: "support", label: "Soporte", description: "WhatsApp del equipo" },
 ];
@@ -45,6 +45,30 @@ export function AdminPanel({
   const [busy, setBusy] = useState(false);
   const [notice, setNotice] = useState("");
   const [filmSearch, setFilmSearch] = useState("");
+  const [storageStatus, setStorageStatus] = useState<{
+    available: boolean;
+    reason?: string;
+  } | null>(null);
+
+  useEffect(() => {
+    let active = true;
+    fetch("/api/admin/storage-health", { cache: "no-store" })
+      .then((response) => response.json())
+      .then((result) => {
+        if (active && typeof result.available === "boolean") {
+          setStorageStatus(result);
+        }
+      })
+      .catch(() => {
+        if (active) {
+          setStorageStatus({
+            available: false,
+            reason: "No se pudo comprobar el almacenamiento de imágenes.",
+          });
+        }
+      });
+    return () => { active = false; };
+  }, []);
 
   const filteredFilms = useMemo(() => {
     const query = filmSearch.trim().toLocaleLowerCase("es");
@@ -72,19 +96,24 @@ export function AdminPanel({
   async function save() {
     setBusy(true);
     setNotice("");
-    const response = await fetch("/api/admin/content", {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(content),
-    });
-    const data = await response.json();
-    setBusy(false);
-    setNotice(
-      response.ok
-        ? "Cambios publicados correctamente."
-        : data.error || "No fue posible guardar.",
-    );
-    if (response.ok) router.refresh();
+    try {
+      const response = await fetch("/api/admin/content", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(content),
+      });
+      const data = await response.json();
+      setNotice(
+        response.ok
+          ? "Cambios publicados correctamente."
+          : data.error || "No fue posible guardar.",
+      );
+      if (response.ok) router.refresh();
+    } catch {
+      setNotice("No se pudo publicar. Revise el almacenamiento e intente de nuevo.");
+    } finally {
+      setBusy(false);
+    }
   }
 
   async function logout() {
@@ -106,15 +135,20 @@ export function AdminPanel({
       body.set("kind", target.kind);
       body.set("slug", target.slug);
     }
-    const response = await fetch("/api/admin/upload", { method: "POST", body });
-    const data = await response.json();
-    setBusy(false);
-    if (!response.ok) {
-      setNotice(data.error || "No fue posible subir la imagen.");
-      return;
+    try {
+      const response = await fetch("/api/admin/upload", { method: "POST", body });
+      const data = await response.json();
+      if (!response.ok) {
+        setNotice(data.error || "No fue posible subir la imagen.");
+        return;
+      }
+      onUrl(data.url);
+      setNotice("Imagen cargada. Presione Publicar cambios para aplicarla.");
+    } catch {
+      setNotice("No se pudo subir la imagen. Revise el almacenamiento e intente de nuevo.");
+    } finally {
+      setBusy(false);
     }
-    onUrl(data.url);
-    setNotice("Imagen cargada. Presione Publicar cambios para aplicarla.");
   }
 
   function updateMachine(index: number, patch: Partial<CmsMachine>) {
@@ -463,6 +497,16 @@ export function AdminPanel({
           )}
           {tab === "films" && (
             <div>
+              {storageStatus && !storageStatus.available && (
+                <div className={styles.storageWarning} role="status">
+                  <strong>Las imágenes subidas no están disponibles ahora.</strong>
+                  <span>
+                    {storageStatus.reason} Los archivos siguen registrados,
+                    pero las subidas y la publicación pueden fallar hasta que
+                    Vercel restablezca el almacenamiento.
+                  </span>
+                </div>
+              )}
               <div className={styles.sectionHead}>
                 <div>
                   <h2>Productos del catálogo</h2>
@@ -511,22 +555,42 @@ export function AdminPanel({
                 </div>
               )}
               {filteredFilms.map(({ film, index }) => (
+                <div className={styles.catalogRecord} key={`${film.slug}-${index}`}>
+                  <div className={styles.catalogRecordTop}>
+                    <CatalogImagePreview key={film.image} src={film.image} alt={film.name} />
+                    <div className={styles.catalogRecordName}>
+                      <strong>{film.name}</strong>
+                      <small>{film.sku ? `SKU ${film.sku}` : "SKU pendiente"}</small>
+                    </div>
+                    <label className={styles.catalogQuickUpload}>
+                      {film.image ? "Reemplazar imagen" : "Subir imagen"}
+                      <input
+                        type="file"
+                        accept="image/jpeg,image/png,image/webp,image/avif"
+                        disabled={busy}
+                        onChange={async (event) => {
+                          const file = event.target.files?.[0];
+                          if (file) {
+                            await upload(
+                              file,
+                              (url) => updateFilm(index, { image: url }),
+                              { kind: "film", slug: film.slug },
+                            );
+                          }
+                          event.target.value = "";
+                        }}
+                      />
+                    </label>
+                  </div>
                 <details
                   className={styles.record}
-                  key={`${film.name}-${index}`}
                 >
                   <summary>
                     <div>
-                      <small>
-                        {film.stock > 0 ||
-                        film.variants?.some((variant) => variant.stock > 0)
-                          ? "CON EXISTENCIA"
-                          : "SIN EXISTENCIA"}
-                      </small>
-                      <strong>{film.name}</strong>
-                      {film.sku && <small>SKU {film.sku}</small>}
+                      <small>{film.stock > 0 || film.variants?.some((variant) => variant.stock > 0) ? "CON EXISTENCIA" : "SIN EXISTENCIA"}</small>
+                      <strong>Editar datos y especificaciones</strong>
                     </div>
-                    <span>Editar ↓</span>
+                    <span>Abrir ↓</span>
                   </summary>
                   <div className={styles.formGrid}>
                     <Field
@@ -667,6 +731,7 @@ export function AdminPanel({
                     </button>
                   </div>
                 </details>
+                </div>
               ))}
             </div>
           )}
@@ -880,6 +945,27 @@ function Field({
         />
       )}
     </label>
+  );
+}
+
+function CatalogImagePreview({ src, alt }: { src: string; alt: string }) {
+  const [failed, setFailed] = useState(false);
+
+  return (
+    <div className={styles.catalogRecordImage}>
+      {src && !failed ? (
+        <Image
+          src={src}
+          alt={alt}
+          width={76}
+          height={76}
+          unoptimized
+          onError={() => setFailed(true)}
+        />
+      ) : (
+        <span>{src ? "Imagen no disponible" : "Sin imagen"}</span>
+      )}
+    </div>
   );
 }
 

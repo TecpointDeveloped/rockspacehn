@@ -27,6 +27,7 @@ export function SiteFooter({ salesNumber = SITE.salesWhatsappNumber, supportNumb
         </div>
         <div>
           <h3>Explorar</h3>
+          <Link href="/">Inicio</Link>
           <Link href="/stickers">Stickers RCL1005</Link>
           <Link href="/maquinas">Máquinas</Link>
           <Link href="/laminas">Láminas</Link>

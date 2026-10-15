@@ -7,6 +7,7 @@ import { usePathname } from "next/navigation";
 import { SITE, whatsappUrlFor } from "@/lib/site";
 
 const links = [
+  { href: "/", label: "Inicio" },
   { href: "/stickers", label: "Stickers" },
   { href: "/maquinas", label: "Máquinas" },
   { href: "/laminas", label: "Láminas" },

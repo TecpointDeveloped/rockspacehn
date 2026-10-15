@@ -21,7 +21,14 @@ export async function PUT(request: Request) {
     return NextResponse.json({ error: "Cada lámina debe tener un slug único antes de publicar." }, { status: 400 });
   }
   content.updatedAt = new Date().toISOString();
-  await put("cms/site-content.json", JSON.stringify(content), { access: "public", allowOverwrite: true, contentType: "application/json", cacheControlMaxAge: 60 });
+  try {
+    await put("cms/site-content.json", JSON.stringify(content), { access: "public", allowOverwrite: true, contentType: "application/json", cacheControlMaxAge: 60 });
+  } catch {
+    return NextResponse.json(
+      { error: "El almacenamiento de Vercel no está disponible. Los cambios no se publicaron." },
+      { status: 503 },
+    );
+  }
   revalidateTag("rockspace-site-content", "max");
   for (const path of ["/", "/stickers", "/maquinas", "/tutoriales", "/laminas", "/soporte"]) revalidatePath(path);
   return NextResponse.json({ ok: true, updatedAt: content.updatedAt });

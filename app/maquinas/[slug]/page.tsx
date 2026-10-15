@@ -10,7 +10,7 @@ import { getMachine, machines } from "@/data/machines";
 import { whatsappUrlFor } from "@/lib/site";
 import { getCmsContent } from "@/lib/cms";
 
-export const revalidate = 60;
+export const revalidate = 1800;
 
 export function generateStaticParams() { return machines.map((machine) => ({ slug: machine.slug })); }
 

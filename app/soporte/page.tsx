@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   description: "Ventas, soporte técnico y guías para equipos Rock Space en Honduras."
 };
 
-export const revalidate = 60;
+export const revalidate = 1800;
 
 export default async function SupportPage() {
   const cms = await getCmsContent();

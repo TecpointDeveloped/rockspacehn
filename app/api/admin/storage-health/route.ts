@@ -1,4 +1,4 @@
-import { list } from "@vercel/blob";
+import { head, BlobNotFoundError } from "@vercel/blob";
 import { NextResponse } from "next/server";
 import { getAdminSession } from "@/lib/admin-auth";
 
@@ -15,15 +15,8 @@ export async function GET() {
   }
 
   try {
-    const { blobs } = await list({ prefix: "cms/site-content.json", limit: 1 });
-    if (!blobs[0]) {
-      return NextResponse.json(
-        { available: true },
-        { headers: { "Cache-Control": "no-store" } },
-      );
-    }
-
-    const response = await fetch(blobs[0].url, { cache: "no-store" });
+    const blob = await head("cms/site-content.json");
+    const response = await fetch(blob.url, { cache: "no-store" });
     return NextResponse.json(
       {
         available: response.ok,
@@ -33,7 +26,13 @@ export async function GET() {
       },
       { headers: { "Cache-Control": "no-store" } },
     );
-  } catch {
+  } catch (error) {
+    if (error instanceof BlobNotFoundError) {
+      return NextResponse.json(
+        { available: true },
+        { headers: { "Cache-Control": "no-store" } },
+      );
+    }
     return NextResponse.json(
       {
         available: false,

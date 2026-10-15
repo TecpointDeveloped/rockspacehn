@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   description: "Centro de tutoriales para las máquinas y soluciones de Rock Space Honduras."
 };
 
-export const revalidate = 60;
+export const revalidate = 1800;
 
 export default async function TutorialsPage() {
   const cms = await getCmsContent();

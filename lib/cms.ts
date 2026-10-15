@@ -1,5 +1,5 @@
 import "server-only";
-import { list } from "@vercel/blob";
+import { head } from "@vercel/blob";
 import { unstable_cache } from "next/cache";
 import { films, type Film } from "@/data/films";
 import { machines, type Machine } from "@/data/machines";
@@ -75,9 +75,7 @@ const legacyFilmNames = new Set(["Lámina Super Self Healing", "Lámina Matte Ga
 async function loadRemoteContent(): Promise<CmsContent> {
   if (!process.env.BLOB_READ_WRITE_TOKEN) return defaultCmsContent;
   try {
-    const result = await list({ prefix: "cms/site-content.json", limit: 1 });
-    const blob = result.blobs[0];
-    if (!blob) return defaultCmsContent;
+    const blob = await head("cms/site-content.json");
     const response = await fetch(blob.url, { cache: "no-store" });
     if (!response.ok) return defaultCmsContent;
     const saved = (await response.json()) as CmsContent;
@@ -171,7 +169,7 @@ async function loadRemoteContent(): Promise<CmsContent> {
   }
 }
 
-const cachedRemoteContent = unstable_cache(loadRemoteContent, ["rockspace-site-content"], { revalidate: 60, tags: ["rockspace-site-content"] });
+const cachedRemoteContent = unstable_cache(loadRemoteContent, ["rockspace-site-content"], { revalidate: 1800, tags: ["rockspace-site-content"] });
 
 export async function getCmsContent(): Promise<CmsContent> {
   return cachedRemoteContent();

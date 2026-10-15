@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   description: "Catálogo Rock Space Honduras de láminas, repuestos y accesorios identificados por SKU."
 };
 
-export const revalidate = 60;
+export const revalidate = 1800;
 
 export default async function FilmsPage() {
   const cms = await getCmsContent();

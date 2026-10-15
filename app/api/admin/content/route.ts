@@ -31,5 +31,6 @@ export async function PUT(request: Request) {
   }
   revalidateTag("rockspace-site-content", "max");
   for (const path of ["/", "/stickers", "/maquinas", "/tutoriales", "/laminas", "/soporte"]) revalidatePath(path);
+  for (const machine of content.machines) revalidatePath(`/maquinas/${machine.slug}`);
   return NextResponse.json({ ok: true, updatedAt: content.updatedAt });
 }

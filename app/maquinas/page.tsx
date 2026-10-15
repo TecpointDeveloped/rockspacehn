@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   description: "Compare plotters, equipos UV y soluciones de transferencia de Rock Space Honduras."
 };
 
-export const revalidate = 60;
+export const revalidate = 1800;
 
 export default async function MachinesPage() {
   const cms = await getCmsContent();

@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   twitter: { card: "summary_large_image", images: ["/images/products/rcl1005-stickers.webp"] }
 };
 
-export const revalidate = 60;
+export const revalidate = 1800;
 
 export default async function StickersPage() {
   const cms = await getCmsContent();

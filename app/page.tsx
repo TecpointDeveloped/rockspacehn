@@ -9,7 +9,7 @@ import { groupPublicFilms } from "@/lib/catalog";
 import { getCmsContent } from "@/lib/cms";
 import { whatsappUrlFor } from "@/lib/site";
 
-export const revalidate = 60;
+export const revalidate = 1800;
 
 export default async function HomePage() {
   const cms = await getCmsContent();

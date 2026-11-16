@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="light">
+<meta name="supported-color-schemes" content="light">
+<title>Impulsá tu negocio con ROCKSPACE</title>
+<style>
+@media only screen and (max-width:620px){
+  .container { width:100%!important; max-width:100%!important; }
+  .pad {padding-left:20px!important;padding-right:20px!important}
+  .heading {font-size:29px!important;line-height:35px!important}
+  .button {display:block!important; width:calc(100% - 44px)!important; text-align:center!important}
+  .image {width:100%!important; height:auto!important}
+}
+</style>
+</head>
+<body style="margin:0;padding:0;background:#edf2f6;font-family:Arial,Helvetica,sans-serif;color:#13243a;">
+<div style="display:none!important;visibility:hidden;opacity:0;color:transparent;height:0;width:0;overflow:hidden;max-height:0;max-width:0;line-height:0;font-size:1px;">Plotter + máquina UV + 50 láminas. Conocé los dos combos y solicitá tu cotización.</div>
+<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="background:#edf2f6;border-collapse:collapse"><tr><td align="center" style="padding:24px 12px;">
+  <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="600" class="container" style="width:600px;max-width:600px;background:#ffffff;border-collapse:collapse;border-radius:8px;overflow:hidden;">
+   <tr><td style="background:#06182b;text-align:center;padding:19px 20px 17px">
+      <span style="font-weight:800;font-size:20px;letter-spacing:.9px;color:#ffffff;">rock<span style="color:#00e4e3;">space</span></span>
+      <div style="font-size:11px;font-weight:700;letter-spacing:2.1px;color:#88aabc;margin-top:5px">HONDURAS · PROMOCIONES PARA NEGOCIOS</div>
+   </td></tr>
+   <tr><td class="pad" style="background:#071e35;text-align:center;padding:34px 38px 30px">
+      <div style="color:#00e4e3;font-weight:bold;font-size:12px;letter-spacing:2px;margin-bottom:12px">NOVIEMBRE 2026</div>
+      <h1 class="heading" style="font-size:35px;line-height:41px;color:#ffffff;margin:0 0 14px;font-weight:800;">¡Impulsá tu<br><span style="color:#00e4e3">negocio!</span></h1>
+      <p style="font-size:16px;line-height:25px;color:#d4e3ee;margin:0;">Dos combos ROCKSPACE para ampliar tus soluciones de protección de pantallas. Elegí el tuyo y solicitá una cotización personalizada.</p>
+   </td></tr>
+   <tr><td class="pad" style="padding:28px 24px 12px;background:#ffffff">
+      <div style="font-size:12px;letter-spacing:1.8px;color:#087f91;font-weight:bold;margin:0 0 10px">COMBO 01</div>
+      <h2 style="font-size:24px;line-height:30px;margin:0 0 8px;color:#061f35">MINI ZV2</h2>
+      <p style="font-size:15px;line-height:24px;margin:0 0 18px;color:#536575">Plotter Mini ZV2 + máquina UV ROCKSPACE + <b>50 láminas</b>.</p>
+      <a href="https://wa.me/50494659287?text=Hola%2C%20quiero%20solicitar%20cotizaci%C3%B3n%20y%20disponibilidad%20del%20combo%20ROCKSPACE%20Mini%20ZV2%20%2B%20m%C3%A1quina%20UV%20%2B%2050%20l%C3%A1minas." style="text-decoration:none;display:block" target="_blank"><img class="image" src="https://rockspacehn.com/newsletter/noviembre-2026/rockspace-combo-mini-zv2.jpg" width="552" border="0" alt="Promoción ROCKSPACE: combo Plotter Mini ZV2, máquina UV y 50 láminas" style="display:block;width:100%;max-width:552px;height:auto;border:0;border-radius:7px"></a>
+   </td></tr>
+   <tr><td class="pad" align="center" style="padding:5px 24px 34px">
+      <a class="button" href="https://wa.me/50494659287?text=Hola%2C%20quiero%20solicitar%20cotizaci%C3%B3n%20y%20disponibilidad%20del%20combo%20ROCKSPACE%20Mini%20ZV2%20%2B%20m%C3%A1quina%20UV%20%2B%2050%20l%C3%A1minas." target="_blank" style="display:inline-block;background:#02dada;color:#052033;text-decoration:none;font-size:14px;font-weight:800;letter-spacing:.5px;border-radius:5px;padding:16px 22px;">SOLICITAR COTIZACIÓN MINI ZV2</a>
+      <div style="font-size:12px;color:#738292;margin-top:11px">Consultá precio de mayoreo y disponibilidad.</div>
+   </td></tr>
+   <tr><td style="padding:0 24px"><div style="height:1px;background:#e3edf1;font-size:1px;line-height:1px">&nbsp;</div></td></tr>
+   <tr><td class="pad" style="padding:32px 24px 12px;background:#ffffff">
+      <div style="font-size:12px;letter-spacing:1.8px;color:#087f91;font-weight:bold;margin:0 0 10px">COMBO 02</div>
+      <h2 style="font-size:24px;line-height:30px;margin:0 0 8px;color:#061f35">ZC1 MAX</h2>
+      <p style="font-size:15px;line-height:24px;margin:0 0 18px;color:#536575">Plotter ZC1 MAX + máquina UV ROCKSPACE + <b>50 láminas</b>.</p>
+      <a href="https://wa.me/50494659287?text=Hola%2C%20quiero%20solicitar%20cotizaci%C3%B3n%20y%20disponibilidad%20del%20combo%20ROCKSPACE%20ZC1%20MAX%20%2B%20m%C3%A1quina%20UV%20%2B%2050%20l%C3%A1minas." style="text-decoration:none;display:block" target="_blank"><img class="image" src="https://rockspacehn.com/newsletter/noviembre-2026/rockspace-combo-zc1-max.jpg" width="552" border="0" alt="Promoción ROCKSPACE: combo Plotter ZC1 MAX, máquina UV y 50 láminas" style="display:block;width:100%;max-width:552px;height:auto;border:0;border-radius:7px"></a>
+   </td></tr>
+   <tr><td class="pad" align="center" style="padding:5px 24px 34px">
+      <a class="button" href="https://wa.me/50494659287?text=Hola%2C%20quiero%20solicitar%20cotizaci%C3%B3n%20y%20disponibilidad%20del%20combo%20ROCKSPACE%20ZC1%20MAX%20%2B%20m%C3%A1quina%20UV%20%2B%2050%20l%C3%A1minas." target="_blank" style="display:inline-block;background:#02dada;color:#052033;text-decoration:none;font-size:14px;font-weight:800;letter-spacing:.5px;border-radius:5px;padding:16px 22px;">SOLICITAR COTIZACIÓN ZC1 MAX</a>
+      <div style="font-size:12px;color:#738292;margin-top:11px">Consultá precio de mayoreo y disponibilidad.</div>
+   </td></tr>
+   <tr><td class="pad" style="text-align:center;background:#071e35;padding:32px 32px 34px">
+      <h2 style="font-size:24px;line-height:30px;color:#ffffff;margin:0 0 10px">¿Cuál combo es para tu negocio?</h2>
+      <p style="color:#d0e7ed;font-size:15px;line-height:23px;margin:0 0 22px">Escribinos y conocé precios de mayoreo, disponibilidad y opciones para tu tienda.</p>
+      <a class="button" href="https://wa.me/50494659287?text=Hola%2C%20quiero%20conocer%20los%20precios%20de%20mayoreo%20y%20disponibilidad%20de%20los%20combos%20ROCKSPACE." target="_blank" style="display:inline-block;background:#02dada;color:#052033;text-decoration:none;font-size:15px;font-weight:800;border-radius:5px;padding:16px 26px;">HABLAR CON VENTAS POR WHATSAPP</a>
+   </td></tr>
+   <tr><td style="background:#262626;text-align:center;padding:27px 20px 24px">
+      <p style="color:#cccccc;font-size:14px;line-height:22px;margin:0 0 19px">Consultá precios de mayoreo y disponibilidad.<br>Te atendemos por WhatsApp.</p>
+      <div style="color:#ffffff;font-size:14px;line-height:23px;font-weight:bold">Atención al cliente y ventas:</div>
+      <a href="https://wa.me/50494659287" style="color:#40d7eb;font-size:14px;line-height:23px;text-decoration:none">+504 9465-9287</a>
+      <div style="color:#ffffff;font-size:14px;line-height:23px;font-weight:bold;margin-top:8px">Soporte técnico:</div>
+      <a href="https://wa.me/50498191003" style="color:#40d7eb;font-size:14px;line-height:23px;text-decoration:none">+504 9819-1003</a>
+   </td></tr>
+   <tr><td style="background:#69afc6;text-align:center;padding:21px 20px 18px">
+      <div style="font-size:13px;color:#0f3140;font-weight:800;letter-spacing:.5px;margin-bottom:6px">ROCKSPACEHN</div>
+      <a href="https://rockspacehn.com" style="color:#112a36;font-size:15px;font-weight:bold;text-decoration:underline">rockspacehn.com</a>
+      <div style="margin-top:7px"><a href="mailto:mercadeo@rockspacehn.com" style="color:#153544;font-size:13px;text-decoration:underline">mercadeo@rockspacehn.com</a></div>
+   </td></tr>
+   <tr><td style="background:#f6f8fb;text-align:center;padding:17px 22px 22px">
+      <p style="color:#82909d;font-size:11px;line-height:17px;margin:0 0 10px">Comunicación comercial de ROCKSPACE HN.</p>
+      <a href="{{ unsubscribe }}" style="color:#546979;font-size:12px;text-decoration:underline">Cancelar suscripción</a>
+      <span style="color:#a5aeb7"> &nbsp;·&nbsp; </span>
+      <a href="{{ mirror }}" style="color:#546979;font-size:12px;text-decoration:underline">Ver en navegador</a>
+   </td></tr>
+  </table>
+</td></tr></table>
+</body>
+</html>

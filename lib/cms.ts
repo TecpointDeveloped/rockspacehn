@@ -149,6 +149,7 @@ async function loadRemoteContent(): Promise<CmsContent> {
             sku: baseline.sku,
             image: imageIsShared ? baseline.image : uploadedImage,
             images: uploadedImage && !imageIsShared ? [uploadedImage] : [],
+            alt: uploadedImage && !imageIsShared ? `${mergedFilm.name} Rock Space` : mergedFilm.alt,
             categoryKey: mergedFilm.categoryKey || baseline.categoryKey,
             stock: Math.max(0, Number(mergedFilm.stock) || 0),
             variants: Array.isArray(mergedFilm.variants) ? mergedFilm.variants : baseline.variants,

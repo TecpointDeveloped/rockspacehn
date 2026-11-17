@@ -1,6 +1,5 @@
 import Image from "next/image";
 import Link from "next/link";
-import { FilmCategorySection } from "@/components/FilmCategorySection";
 import { MachineCard } from "@/components/MachineCard";
 import { MachineCarousel } from "@/components/MachineCarousel";
 import { SupportCTA } from "@/components/SupportCTA";
@@ -15,8 +14,13 @@ export default async function HomePage() {
   const cms = await getCmsContent();
   const filmGroups = groupPublicFilms(cms.films);
   const carouselMachines = [
+    {
+      name: "RCL1005",
+      image: cms.home.heroImage || cms.sticker.heroImage || stickerMachine.heroImage,
+      href: "/stickers",
+      label: "Impresión y corte para stickers, skins y fotografías personalizadas.",
+    },
     ...cms.machines.map((machine) => ({ name: machine.name, image: machine.image, href: `/maquinas/${machine.slug}`, label: machine.tagline })),
-    { name: "RCL1005", image: cms.sticker.heroImage || stickerMachine.heroImage, href: "/stickers", label: "Impresión y corte para stickers personalizados." }
   ];
 
   return (
@@ -31,7 +35,7 @@ export default async function HomePage() {
 
       <nav className="quick-categories shell" aria-label="Categorías de productos">
         <a href="#maquinas"><b>01</b><span>Máquinas</span></a>
-        {filmGroups.map((group, index) => <a href={`#${group.key}`} key={group.key}><b>{String(index + 2).padStart(2, "0")}</b><span>{group.label}</span></a>)}
+        {filmGroups.map((group, index) => <Link href={`/laminas#${group.key}`} key={group.key}><b>{String(index + 2).padStart(2, "0")}</b><span>{group.label}</span></Link>)}
         <a href="#personalizacion"><b>{String(filmGroups.length + 2).padStart(2, "0")}</b><span>Personalización</span></a>
       </nav>
 
@@ -42,7 +46,40 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {filmGroups.map((group, index) => <FilmCategorySection key={group.key} id={group.key} title={group.label} description={group.description} products={group.products} dark={index % 3 === 1} salesNumber={cms.support.supportWhatsappNumber} />)}
+      <section className="home-catalog-overview">
+        <div className="shell section">
+          <div className="home-catalog-heading">
+            <div>
+              <span className="eyebrow">CATÁLOGO ROCK SPACE</span>
+              <h2>Encuentre la solución y vea el detalle cuando lo necesite.</h2>
+              <p>Una vista rápida de cada familia mantiene el inicio ligero. El catálogo completo conserva nombres, SKU, existencias, imágenes y especificaciones.</p>
+            </div>
+            <Link className="button button-primary" href="/laminas">Ver catálogo completo</Link>
+          </div>
+          <div className="home-catalog-grid">
+            {filmGroups.map((group, index) => {
+              const featured = group.products.find((product) => product.image);
+              return (
+                <Link className="home-catalog-item" href={`/laminas#${group.key}`} key={group.key}>
+                  <div className="home-catalog-visual">
+                    {featured?.image ? (
+                      <Image src={featured.image} alt={`${featured.name} Rock Space`} width={760} height={760} quality={75} sizes="(max-width: 700px) 42vw, (max-width: 1000px) 28vw, 210px" />
+                    ) : (
+                      <span aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
+                    )}
+                  </div>
+                  <div className="home-catalog-copy">
+                    <span>{String(group.products.length).padStart(2, "0")} productos</span>
+                    <h3>{group.label}</h3>
+                    <p>{group.description}</p>
+                    <b>Explorar familia →</b>
+                  </div>
+                </Link>
+              );
+            })}
+          </div>
+        </div>
+      </section>
 
       <section className="section shell personalization-block" id="personalizacion">
         <div className="personalization-copy"><span className="eyebrow light">STICKERS / PERSONALIZACIÓN</span><h2>Ideas que salen listas para pegar.</h2><p>La RCL1005 reúne impresión y corte para crear stickers, skins y fotografías personalizadas desde un solo equipo.</p><div className="button-row"><Link className="button button-white" href="/stickers">Explorar personalización</Link><a className="button button-ghost-light" href={whatsappUrlFor(cms.support.supportWhatsappNumber, "Hola, quiero información sobre la RCL1005 y personalización.")} target="_blank" rel="noreferrer">Solicitar información</a></div></div>
